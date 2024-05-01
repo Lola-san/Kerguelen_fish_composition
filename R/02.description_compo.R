@@ -13,9 +13,9 @@
 #'
 #'
 #'
-# function to didentify values under limit of quantification (loq), for non
+# function to identify values under limit of quantification (loq), for non
 # essential nutrients 
-replace_under_loq_values <- function(fish_compo_tib
+ID_under_loq_values <- function(fish_compo_tib
 ) 
 {
   
@@ -60,6 +60,8 @@ replace_under_loq_values <- function(fish_compo_tib
   openxlsx::write.xlsx(table_LOQ_sp, 
                        file = "output/samples_fish_sp_nut_under_LOQ.xlsx")
   
+  list(table_LOQ_all, table_LOQ_sp)
+  
 }
 
 #'
@@ -68,63 +70,88 @@ replace_under_loq_values <- function(fish_compo_tib
 #'
 #'
 # function to display boxplot of elemental composition per species
-table_compo_fish_sp <- function(fish_compo_tib, 
-                                object_type # either "output" or "file" 
-) {
+table_compo_fish_sp_without_loq_replaced <- function(fish_compo_tib) {
   
+  table <- fish_compo_tib |>
+    dplyr::select(-c(Cr, Mo, V)) |>
+    dplyr::mutate(Pb = as.numeric(Pb), 
+                  Sr = as.numeric(Sr), 
+                  Ag = as.numeric(Ag)) |>
+    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
+                                 Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Cu, Mn, Se,
+                                 As, Ni, Co), 
+                        names_to = 'Nutrient', 
+                        values_to = "concentration_mg_kg_dw") |>
+    ## remove NAs if there is still some
+    #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
+    dplyr::group_by(Family, Species, Nutrient) |>
+    dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
+                     mean = round(mean(concentration_mg_kg_dw, 
+                                       na.rm = TRUE), 3),
+                     sd = round(sd(concentration_mg_kg_dw, 
+                                   na.rm = TRUE), 3)) |> 
+    tidyr::pivot_longer(cols = c(mean, sd), 
+                        names_to = "statistic", 
+                        values_to = "value") |>
+    tidyr::pivot_wider(names_from = Nutrient, 
+                       values_from = value)
   
-  if (object_type == "file") {
-    table <- res_fish_tib |>
-      tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                   Ca, P, Mg, Na, K, 
-                                   Fe, Zn, Cu, Mn, Se,
-                                   As, Ni, Co), 
-                          names_to = 'Nutrient', 
-                          values_to = "concentration_mg_kg_dw") |>
-      ## remove NAs if there is still some
-      #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
-      dplyr::group_by(Family, Species, Nutrient) |>
-      dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
-                       mean = round(mean(concentration_mg_kg_dw, 
-                                         na.rm = FALSE), 3),
-                       sd = round(sd(concentration_mg_kg_dw, 
-                                     na.rm = FALSE), 3)) |> 
-      tidyr::pivot_wider(names_from = Nutrient, 
-                         values_from = c(mean, sd), 
-                         names_sep = "_")
-    
-    openxlsx::write.xlsx(table, 
-                         file = paste0("output/compo fish/summary_fish_compo_sp.xlsx"))
-  } else {
-    res_fish_tib |>
-      tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, 
-                                   Mg, Mn, Na, Ni, P, Se, Zn), 
-                          names_to = "Nutrient", 
-                          values_to = "concentration_mg_kg_dw") |>
-      # remove NAs if there is still some
-      dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
-      dplyr::group_by(Family, Species, Nutrient) |>
-      dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
-                       min = round(min(concentration_mg_kg_dw), 3), 
-                       `2.5p_quant` = round(quantile(concentration_mg_kg_dw, 
-                                                     probs = c(0.025)), 3),
-                       mean = round(mean(concentration_mg_kg_dw), 3),
-                       `97.5p_quant` = round(quantile(concentration_mg_kg_dw, 
-                                                      probs = c(0.975)), 3),
-                       max = round(max(concentration_mg_kg_dw), 3), 
-                       sd = round(sd(concentration_mg_kg_dw), 3), 
-                       cv = round(sd(concentration_mg_kg_dw)/mean, 3)) |>
-      tidyr::pivot_longer(cols = c(min, `2.5p_quant`, mean, `97.5p_quant`,
-                                   max, sd, cv), 
-                          names_to = "stat_variable", 
-                          values_to = "stat_value") |>
-      tidyr::pivot_wider(names_from = "Nutrient", 
-                         values_from = "stat_value")
-  }
+  openxlsx::write.xlsx(table, 
+                       file = paste0("output/summary_fish_compo_sp_loq_not_replaced.xlsx"))
   
+  table
   
 }
 
+
+#'
+#'
+#'
+#'
+#'
+# function to display boxplot of elemental composition per species
+# with values under loq replaced by loq/2, so it depends on samples and/or
+# nutrients
+table_compo_fish_sp_with_loq_replaced <- function(fish_compo_tib) {
+  
+  table <- fish_compo_tib |>
+    dplyr::select(-c(Cr, Mo, V)) |>
+    dplyr::mutate(Pb = as.numeric(Pb), 
+                  Sr = as.numeric(Sr), 
+                  Ag = as.numeric(Ag)) |>
+    dplyr::mutate(Ag = dplyr::case_when(is.na(Ag) ~ 0.01/2, 
+                                        # loq is 0.01 for all samples 
+                                        TRUE ~ Ag), 
+                  Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
+                                        # loq is 0.01 for all samples 
+                                        TRUE ~ Pb)) |>
+    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
+                                 Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Cu, Mn, Se,
+                                 As, Ni, Co), 
+                        names_to = 'Nutrient', 
+                        values_to = "concentration_mg_kg_dw") |>
+    ## remove NAs if there is still some
+    #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
+    dplyr::group_by(Family, Species, Nutrient) |>
+    dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
+                     mean = round(mean(concentration_mg_kg_dw, 
+                                       na.rm = FALSE), 3),
+                     sd = round(sd(concentration_mg_kg_dw, 
+                                   na.rm = FALSE), 3)) |> 
+    tidyr::pivot_longer(cols = c(mean, sd), 
+                        names_to = "statistic", 
+                        values_to = "value") |>
+    tidyr::pivot_wider(names_from = Nutrient, 
+                       values_from = value)
+  
+  openxlsx::write.xlsx(table, 
+                       file = paste0("output/summary_fish_compo_sp_loq_replaced.xlsx"))
+  
+  table
+  
+}
 
 #'
 #'
@@ -188,48 +215,483 @@ complete_fish_data <- function(res_fish_tib,
                                                             "Protomyctophum tenisoni") ~ "Bathypelagic"))
 }
 
+
 #'
 #'
 #'
-# simple function to add ecological group to each species
-# ecological habitat given on Fishbase
-add_eco_habitat_sp <- function(compo_tib) {
+#'
+#'
+# function to compare composition of all fish analized 
+# density plot normalised per type
+density_plot_all_nut <- function(res_fish_tib) {
+  #options(scipen = 999)
   
-  compo_tib |>
-    dplyr::mutate(habitat = dplyr::case_when(Species %in% c("Gobionotothen acuta", 
-                                                            "Channichthys rhinoceratus",
-                                                            "Dissostichus eleginoides",
-                                                            "Mancopsetta mancopsetta",
-                                                            "Electrona antarctica") ~ "Demersal", 
-                                             Species %in% c("Lepidonotothen squamifrons", 
-                                                            "Champsocephalus gunnari",
-                                                            "Lindbergichthys mizops",
-                                                            "Muraenolepis sp",
-                                                            "Gymnoscopelus piabilis",
-                                                            "Gymnoscopelus bolini") ~ "Benthopelagic", 
-                                             Species %in% c("Bathydraco antarcticus",
-                                                            "Macrourus carinatus",
-                                                            "Paradiplospinus gracilis",
-                                                            "Echiodon cryomargarites") ~ "Bathydemersal", 
-                                             Species %in% c("Krefftichthys anderssoni",
-                                                            "Melanostigma gelatinosum",
-                                                            "Bathylagus tenuis",
-                                                            "Luciosudis normani", 
-                                                            "Gymnoscopelus braueri", 
-                                                            "Gymnoscopelus fraseri", 
-                                                            "Gymnoscopelus nicholsi", 
-                                                            "Electrona subaspera",
-                                                            "Poromitra crassiceps", 
-                                                            "Nansenia antarctica",
-                                                            "Electrona carlsbergi", 
-                                                            "Protomyctophum andriashevi",
-                                                            "Protomyctophum bolini", 
-                                                            "Protomyctophum choriodon",
-                                                            "Stomias sp",
-                                                            "Idiacanthus atlanticus",
-                                                            "Arctozenus risso",
-                                                            "Notolepis coatsi", 
-                                                            "Protomyctophum tenisoni") ~ "Bathypelagic")) 
+  res_fish_tib |>
+    dplyr::filter(statistic == "mean") |>
+    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Sr, Cu, Mn, Se,
+                                 Ni, Cd, As, Co, 
+                                 Ag, Pb), 
+                        names_to = "Nutrient", 
+                        values_to = "concentration_mg_kg_dw") |>
+    dplyr::mutate(Nutrient = factor(Nutrient, 
+                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Ni", "Se",
+                                               "Cd", "Co", "Ag", "Pb"))) |>
+    ggplot2::ggplot(ggplot2::aes(x = concentration_mg_kg_dw,
+                                 fill = Nutrient, 
+                                 color = Nutrient)) +
+    ggplot2::geom_density(alpha = 0.8) +
+    ggplot2::facet_wrap(~ Nutrient, scale = "free", ncol = 4) +
+    ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
+                                          "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
+                                          "#CEC917FF", "#3A160AFF", "#E75B64FF",
+                                          "#92BBD9FF", "#26432FFF", "#D98594FF",
+                                          "#2e276a", "#5c4d73",
+                                          "#DE7862FF","#D8AF39FF",
+                                          "#583B2BFF")) +
+    ggplot2::scale_color_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
+                                           "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
+                                           "#CEC917FF", "#3A160AFF", "#E75B64FF",
+                                           "#92BBD9FF", "#26432FFF", "#D98594FF",
+                                           "#2e276a", "#5c4d73",
+                                           "#DE7862FF","#D8AF39FF",
+                                           "#583B2BFF")) +
+    ggplot2::xlab("Nutrient concentration (in mg/kg dry weight)") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14), 
+                   axis.text.y = ggplot2::element_blank(), 
+                   axis.title.x = ggplot2::element_text(size = 18, face = "bold"), 
+                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
+                   strip.text = ggplot2::element_text(size = 15, face = "bold"),
+                   panel.spacing.x = ggplot2::unit(0.5, "cm"),
+                   legend.position = "none"
+    )
+  ggplot2::ggsave("output/densityplot_all_nut.jpg",
+                  scale = 1,
+                  height = 6, width = 12
+  )
+  
+  
+  res_fish_tib |>
+    dplyr::filter(statistic == "mean") |>
+    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Sr, Cu, Mn, Se,
+                                 Ni, Cd, As, Co, 
+                                 Ag, Pb), 
+                        names_to = "Nutrient", 
+                        values_to = "mean_sp_conc_mg_kg_dw") |>
+    dplyr::mutate(Nutrient = factor(Nutrient, 
+                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Ni", "Se",
+                                               "Cd", "Co", "Ag", "Pb"))) |>
+    dplyr::group_by(Nutrient) |>
+    dplyr::mutate(norm_conc = (mean_sp_conc_mg_kg_dw - min(mean_sp_conc_mg_kg_dw))/
+                    (max(mean_sp_conc_mg_kg_dw) - min(mean_sp_conc_mg_kg_dw))) |>
+    ggplot2::ggplot(ggplot2::aes(x = norm_conc,
+                                 y = Nutrient,
+                                 fill = Nutrient, 
+                                 color = Nutrient)) +
+    ggridges::geom_density_ridges(alpha = 0.6, 
+                                  scale = 2) +
+    #ggplot2::coord_flip() +
+    ggplot2::scale_x_continuous(expand = c(0, 0)) +
+    ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
+                                          "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
+                                          "#CEC917FF", "#3A160AFF", "#E75B64FF",
+                                          "#92BBD9FF", "#26432FFF", "#D98594FF",
+                                          "#2e276a", "#5c4d73",
+                                          "#DE7862FF","#D8AF39FF",
+                                          "#583B2BFF")) +
+    ggplot2::scale_color_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
+                                           "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
+                                           "#CEC917FF", "#3A160AFF", "#E75B64FF",
+                                           "#92BBD9FF", "#26432FFF", "#D98594FF",
+                                           "#2e276a", "#5c4d73",
+                                           "#DE7862FF","#D8AF39FF",
+                                           "#583B2BFF")) +
+    ggplot2::xlab("Nutrient concentration normalized between 0 and 1") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14), 
+                   axis.text.y = ggplot2::element_text(size = 14), 
+                   axis.title.x = ggplot2::element_text(size = 18, face = "bold"), 
+                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
+                   strip.text = ggplot2::element_text(size = 15, face = "bold"),
+                   panel.spacing.x = ggplot2::unit(0.5, "cm"),
+                   legend.position = "none"
+    )
+  ggplot2::ggsave("output/density-ridge-plot_all_nut_norm.jpg",
+                  scale = 1,
+                  height = 8, width = 7
+  )
+  
+}
+
+#' Title
+#'
+#' @param res_fish_tib 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+barplot_nut_fish_compo_relative <- function(res_fish_tib) {
+  
+  # with mean per species
+  res_fish_tib |>
+    dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
+                    Zn + Sr + Cu + Mn + Se + Ni + Cd + As + Co +
+                    Ag + Pb) |>
+    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Sr, Cu, Mn, Se,
+                                 Ni, Cd, As, Co, 
+                                 Ag, Pb), 
+                        names_to = "Nutrient", 
+                        values_to = "conc_mg_kg_dw") |> 
+    dplyr::filter(statistic == "mean") |>
+    dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
+                  Nutrient = factor(Nutrient, 
+                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Ni", "Se",
+                                               "Cd", "Co", "Ag", "Pb")),
+                  micro_macro = dplyr::case_when(
+                    Nutrient %in% c("Ca", "P", "Na", 
+                                    "K", "Mg") ~ "macro", 
+                    Nutrient %in% c("Fe", "Zn", "Sr") ~ "micro", 
+                    Nutrient %in% c("Cu", "Mn", "As", "Ni", "Se") ~ "micromicro",  
+                    Nutrient %in% c("Cd", "Co", "Ag", "Pb") ~ "micromicromicro",)) |> 
+    # order of samples determined in work-in-progress/set-up-the-rest.R
+    dplyr::mutate(Species = factor(Species, 
+                                   levels = c(
+                                     # order is relative to Ca concentration as
+                                     # determined in work-in-progress/set-up-the-rest
+                                     "Bathydraco antarcticus",
+                                     "Lindbergichthys mizops",
+                                     "Mancopsetta mancopsetta",
+                                     "Gobionotothen acuta",       
+                                     "Protomyctophum bolini",
+                                     "Protomyctophum tenisoni",   
+                                     "Gymnoscopelus bolini",
+                                     "Protomyctophum andriashevi",
+                                     "Lepidonotothen squamifrons",
+                                     "Electrona carlsbergi",      
+                                     "Gymnoscopelus fraseri",
+                                     "Electrona subaspera",       
+                                     "Gymnoscopelus piabilis",
+                                     "Gymnoscopelus braueri",     
+                                     "Protomyctophum choriodon",
+                                     "Channichthys rhinoceratus", 
+                                     "Macrourus carinatus",
+                                     "Gymnoscopelus nicholsi",    
+                                     "Electrona antarctica",
+                                     "Dissostichus eleginoides",
+                                     "Paradiplospinus gracilis",
+                                     "Poromitra crassiceps",      
+                                     "Muraenolepis sp",
+                                     "Champsocephalus gunnari",   
+                                     "Stomias sp",
+                                     "Notolepis coatsi",
+                                     "Krefftichthys anderssoni",
+                                     "Melanostigma gelatinosum",  
+                                     "Echiodon cryomargarites",
+                                     "Arctozenus risso",          
+                                     "Luciosudis normani",
+                                     "Nansenia antarctica",       
+                                     "Bathylagus tenuis",
+                                     "Idiacanthus atlanticus"))) |>
+    dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp", 
+                                                             "Muraenolepis sp") ~ Species,
+                                              TRUE ~ paste0(stringr::str_sub(Species, 
+                                                                             start = 1, end = 1),
+                                                            ". ",
+                                                            stringr::str_split_fixed(Species, " ", 2)[,2]))) |>
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(ggplot2::aes(x = sp_short, y = conc_relative, 
+                                   fill = Nutrient), 
+                      stat = "identity", 
+                      position = ggplot2::position_stack()) +
+    ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
+                                          "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
+                                          "#CEC917FF", "#3A160AFF", "#E75B64FF",
+                                          "#92BBD9FF", "#26432FFF", "#D98594FF",
+                                          "#2e276a", "#5c4d73",
+                                          "#DE7862FF","#D8AF39FF",
+                                          "#583B2BFF")) +
+    ggplot2::guides(fill = ggplot2::guide_legend(ncol = 2)) +
+    ggplot2::facet_wrap(~ micro_macro, scales = "free_y", 
+                        nrow = 3) +
+    ggplot2::ggtitle("") +
+    ggplot2::ylab("Relative fraction") +
+    ggplot2::xlab("Species") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.y = ggplot2::element_text(size = 12), 
+                   axis.text.x = ggplot2::element_text(size = 5, 
+                                                       angle = 30, 
+                                                       hjust = 1), 
+                   title = ggplot2::element_text(size = 15, 
+                                                 face = "bold"),
+                   axis.title.x = ggplot2::element_text(size = 14, 
+                                                        face = "bold"), 
+                   axis.title.y = ggplot2::element_text(size = 14, 
+                                                        face = "bold"),
+                   strip.text.x = ggplot2::element_blank(),
+                   legend.position = "right", 
+                   legend.text = ggplot2::element_text(size = 12),
+    )
+  ggplot2::ggsave("output/fish_compo_rel_micro-macro_orderCa.jpg",
+                  scale = 1,
+                  height = 4, width = 10
+  )
+  
+  # with mean per species
+  res_fish_tib |>
+    dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
+                    Zn + Sr + Cu + Mn + Se + Ni + Cd + As + Co +
+                    Ag + Pb) |>
+    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Sr, Cu, Mn, Se,
+                                 Ni, Cd, As, Co, 
+                                 Ag, Pb), 
+                        names_to = "Nutrient", 
+                        values_to = "conc_mg_kg_dw") |> 
+    dplyr::filter(statistic == "mean") |>
+    dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
+                  Nutrient = factor(Nutrient, 
+                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Ni", "Se",
+                                               "Cd", "Co", "Ag", "Pb")),
+                  micro_macro = dplyr::case_when(
+                    Nutrient %in% c("Ca", "P", "Na", 
+                                    "K", "Mg") ~ "macro", 
+                    Nutrient %in% c("Fe", "Zn", "Sr") ~ "micro", 
+                    Nutrient %in% c("Cu", "Mn", "As", "Ni", "Se") ~ "micromicro",  
+                    Nutrient %in% c("Cd", "Co", "Ag", "Pb") ~ "micromicromicro",)) |> 
+    # order of samples determined in work-in-progress/set-up-the-rest.R
+    dplyr::mutate(Species = factor(Species, 
+                                   levels = c(# order by family
+                                     #Achiropsettidae
+                                     "Mancopsetta mancopsetta",
+                                     #Bathydraconidae
+                                     "Bathydraco antarcticus",
+                                     #Bathylagidae    
+                                     "Bathylagus tenuis",
+                                     #Carapidae
+                                     "Echiodon cryomargarites",
+                                     #Channichthyidae
+                                     "Champsocephalus gunnari", 
+                                     "Channichthys rhinoceratus", 
+                                     #Gempylidae
+                                     "Paradiplospinus gracilis",
+                                     #Macrouridae
+                                     "Macrourus carinatus",
+                                     #Melamphaidae
+                                     "Poromitra crassiceps",  
+                                     #Microstomatidae
+                                     "Nansenia antarctica",  
+                                     #Muraenolepididae  
+                                     "Muraenolepis sp",  
+                                     #Myctophidae  
+                                     "Electrona antarctica",
+                                     "Electrona carlsbergi", 
+                                     "Electrona subaspera",  
+                                     "Gymnoscopelus bolini",
+                                     "Gymnoscopelus braueri",     
+                                     "Gymnoscopelus fraseri",   
+                                     "Gymnoscopelus nicholsi",     
+                                     "Gymnoscopelus piabilis",  
+                                     "Krefftichthys anderssoni",
+                                     "Protomyctophum andriashevi",    
+                                     "Protomyctophum bolini", 
+                                     "Protomyctophum choriodon",
+                                     "Protomyctophum tenisoni",  
+                                     #Notosudidae         
+                                     "Luciosudis normani",
+                                     #Nototheniidae
+                                     "Dissostichus eleginoides", 
+                                     "Gobionotothen acuta",  
+                                     "Lepidonotothen squamifrons",    
+                                     "Lindbergichthys mizops",
+                                     #Paralepididae
+                                     "Arctozenus risso", 
+                                     "Notolepis coatsi", 
+                                     #Stomiidae  
+                                     "Idiacanthus atlanticus",
+                                     "Stomias sp",
+                                     #Zoarcidae
+                                     "Melanostigma gelatinosum"))) |>
+    dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp", 
+                                                             "Muraenolepis sp") ~ Species,
+                                              TRUE ~ paste0(stringr::str_sub(Species, 
+                                                                             start = 1, end = 1),
+                                                            ". ",
+                                                            stringr::str_split_fixed(Species, " ", 2)[,2]))) |>
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(ggplot2::aes(x = sp_short, y = conc_relative, 
+                                   fill = Nutrient), 
+                      stat = "identity", 
+                      position = ggplot2::position_stack()) +
+    ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
+                                          "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
+                                          "#CEC917FF", "#3A160AFF", "#E75B64FF",
+                                          "#92BBD9FF", "#26432FFF", "#D98594FF",
+                                          "#2e276a", "#5c4d73",
+                                          "#DE7862FF","#D8AF39FF",
+                                          "#583B2BFF")) +
+    ggplot2::guides(fill = ggplot2::guide_legend(ncol = 2)) +
+    ggplot2::facet_wrap(~ micro_macro, scales = "free_y", 
+                        nrow = 3) +
+    ggplot2::ggtitle("") +
+    ggplot2::ylab("Relative fraction") +
+    ggplot2::xlab("Species") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.y = ggplot2::element_text(size = 12), 
+                   axis.text.x = ggplot2::element_text(size = 5, 
+                                                       angle = 30, 
+                                                       hjust = 1,
+                                                       face = "italic"), 
+                   title = ggplot2::element_text(size = 15, 
+                                                 face = "bold"),
+                   axis.title.x = ggplot2::element_text(size = 14, 
+                                                        face = "bold"), 
+                   axis.title.y = ggplot2::element_text(size = 14, 
+                                                        face = "bold"),
+                   strip.text.x = ggplot2::element_blank(),
+                   legend.position = "right", 
+                   legend.text = ggplot2::element_text(size = 12),
+    )
+  ggplot2::ggsave("output/fish_compo_rel_micro-macro_order_family.jpg",
+                  scale = 1,
+                  height = 4, width = 10
+  )
+  
+}
+
+
+
+#'
+#'
+#'
+#'
+#'
+# function to create barplot displaying CV for major and trace nutrients in
+# both scats and prey
+barplot_nut_CV <- function(res_fish_tib
+) {
+  
+  options(scipen = 999)
+  
+  res_fish_tib |>
+    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Sr, Cu, Mn, Se,
+                                 Ni, Cd, As, Co, 
+                                 Ag, Pb), 
+                        names_to = "Nutrient", 
+                        values_to = "concentration_mg_kg_dw") |>
+    dplyr::filter(statistic == "mean") |>
+    dplyr::mutate(Nutrient = factor(Nutrient, 
+                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Ni", "Se",
+                                               "Cd", "Co", "Ag", "Pb")), 
+                  major_or_trace = dplyr::case_when(Nutrient %in% c("Ca", "P", 
+                                                                    "Na", "K", 
+                                                                    "Mg", "Sr") ~ "Major", 
+                                                    Nutrient %in% c("Fe", "Zn",
+                                                                    "Cu", "Mn", 
+                                                                    "Se", "As", 
+                                                                    "Ni","Co", 
+                                                                    "Cd",
+                                                                    "Ag", "Pb") ~ "Trace")) |>
+    dplyr::group_by(major_or_trace, Nutrient) |>
+    dplyr::summarise(mean = round(mean(concentration_mg_kg_dw), 2),
+                     sd = round(sd(concentration_mg_kg_dw), 2), 
+                     cv = round(sd/mean, 3)) |>
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(ggplot2::aes(x = Nutrient, 
+                                   y = cv, 
+                                   fill = major_or_trace), 
+                      stat = "identity") +
+    ggplot2::scale_fill_manual(values = c("Major" = "#DE7862FF", 
+                                          "Trace" = "#1D2645FF")) +
+    ggplot2::ylab("Coefficient of variation") +
+    ggplot2::xlab("Nutrient") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 16), 
+                   axis.text.y = ggplot2::element_text(size = 15), 
+                   axis.title.x = ggplot2::element_text(size = 16, face = "bold"), 
+                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
+                   strip.text = ggplot2::element_text(size = 15),
+                   legend.title = ggplot2::element_blank(), 
+                   legend.text = ggplot2::element_text(size = 15), 
+                   legend.key.height = ggplot2::unit(0.5, "cm"), 
+                   legend.position = "bottom"
+    )
+  ggplot2::ggsave("output/CV_per_nutrient.jpg",
+                  scale = 1,
+                  height = 3.5, width = 6
+  )
+  
+}
+
+
+#'
+#'
+#'
+#'
+#'
+# function to display correlation plot of elemental composition of fish
+corr_compo_fish <- function(res_fish_tib) {
+  
+  corr_mat <- robCompositions::corCoDa(
+    as.data.frame(res_fish_tib |>
+                    dplyr::filter(statistic =="mean") |>
+                    dplyr::ungroup()|>
+                    dplyr::select(c(Ca, P, Mg, Na, K, 
+                                    Fe, Zn, Sr, Cu, Mn, Se,
+                                    Ni, Cd, As, Co, 
+                                    Ag, Pb 
+                    )))) 
+  
+  colnames(corr_mat) <- rownames(corr_mat) <- c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                                "Fe", "Zn", "Cu", "Mn",
+                                                "As", "Ni", "Se",
+                                                "Cd", "Co", "Ag", "Pb")
+  
+  get_lower_tri<-function(cormat){
+    cormat[lower.tri(cormat)] <- NA
+    return(cormat)
+  }
+  
+  melted_cormat <- tibble::as_tibble(reshape2::melt(get_lower_tri(corr_mat), 
+                                                    na.rm = TRUE)) 
+  
+  ggplot2::ggplot(data = melted_cormat, ggplot2::aes(Var2, Var1, fill = value)) +
+    ggplot2::geom_tile(color = "white") +
+    ggplot2::scale_fill_gradient2(low = "#F0D77BFF", 
+                                  high = "#E75B64FF", 
+                                  mid = "white", 
+                                  midpoint = 0, limit = c(-1,1),
+                                  name = "Correlation\ncoefficient") +
+    ggplot2::theme_bw() + 
+    ggplot2::theme(plot.title = ggplot2::element_text(size = 16, 
+                                                      face = "bold", 
+                                                      hjust = 0.5),
+                   axis.text.x = ggplot2::element_text(size = 15), 
+                   axis.text.y = ggplot2::element_text(size = 15), 
+                   axis.title.x = ggplot2::element_blank(), 
+                   axis.title.y = ggplot2::element_blank(), 
+                   legend.position = "bottom", 
+                   legend.title = ggplot2::element_text(size = 14, 
+                                                        vjust = 1.3), 
+                   legend.text = ggplot2::element_text(size = 11))
+  ggplot2::ggsave("output/corrplot_compo_fish.jpg",
+                  scale = 1,
+                  height = 5, width = 5.5
+  )
   
 }
 

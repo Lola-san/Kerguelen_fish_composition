@@ -36,8 +36,36 @@ list(
                                            output_compo)),
   
   #################### RESULTS : SAMPLE COMPOSITION ############################
-  tar_target(nut_under_loq, replace_under_loq_values(output_compo))
+  # identify and assess proportion of loq values 
+  tar_target(nut_under_loq, ID_under_loq_values(output_compo)), 
 
+  # table with concentrations per species 
+  tar_target(table_fish_sp_conc_results, 
+             table_compo_fish_sp_without_loq_replaced(output_compo)),
+  tar_target(table_fish_sp_conc_results_loq_replaced, 
+             table_compo_fish_sp_with_loq_replaced(output_compo)),
+  # add * on following species and nutrient values to indicate it includes
+  # samples with conc < loq
+  # Ag: Mancopsetta mancopsetta (1), Bathydraco antarcticus (1), 
+  # Echiodon cryomargarites (2),
+  # Champsocephalus gunnari (3), Channichthys rhinoceratus (7),
+  # Electrona antarctica (2), Gymnoscopelus bolini (4), 
+  # Gymnoscopelus braueri (9),
+  # Dissostichus eleginoides (2), Gobionotothen acuta (3), 
+  # Lindbergichthys mizops (2),
+  # Notolepis coatsi (3), Stomias sp (2)
+  # Pb: Champsocephalus gunnari (7), Channichthys rhinoceratus (3),
+  # Gobionotothen acuta (3), Muraenolepis sp (2)
+  
+  ################## DESCRIPTION COMPOSITION ###################################
+  tar_target(density_plot, 
+             density_plot_all_nut(table_fish_sp_conc_results_loq_replaced)),
+  tar_target(barplot_compo_relative, 
+             barplot_nut_fish_compo_relative(table_fish_sp_conc_results_loq_replaced)),
+  tar_target(barplot_compo_CV, 
+             barplot_nut_CV(table_fish_sp_conc_results_loq_replaced)),
+  tar_target(corrplot_covariation_nut, 
+             corr_compo_fish(table_fish_sp_conc_results_loq_replaced))
   
   ####### IDENTIFY ANALYTICAL OUTLIERS + POTENTIAL CONTAMINATION ###############
   ###### samples identified with adnormal values must be treated independently 

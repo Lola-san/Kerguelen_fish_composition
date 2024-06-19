@@ -798,6 +798,18 @@
       ],
       "Hash": "15e9634c0fcd294799e9b2e929ed1b86"
     },
+    "ggdendro": {
+      "Package": "ggdendro",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "MASS",
+        "R",
+        "ggplot2"
+      ],
+      "Hash": "6c64efa73d60c45946a5e6e3f894fdcd"
+    },
     "ggfortify": {
       "Package": "ggfortify",
       "Version": "0.4.17",
@@ -877,6 +889,18 @@
         "tidyr"
       ],
       "Hash": "02cdab34154e9e70dac279afbb20d34b"
+    },
+    "ghibli": {
+      "Package": "ghibli",
+      "Version": "0.3.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "grDevices",
+        "prismatic"
+      ],
+      "Hash": "56360768a286176681d3b6dc2326397e"
     },
     "glue": {
       "Package": "glue",
@@ -1553,6 +1577,19 @@
         "R"
       ],
       "Hash": "6b01fc98b1e86c4f705ce9dcfd2f57c7"
+    },
+    "prismatic": {
+      "Package": "prismatic",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "farver",
+        "grDevices",
+        "graphics"
+      ],
+      "Hash": "51967d2e55a523791ae22832e86209ae"
     },
     "processx": {
       "Package": "processx",

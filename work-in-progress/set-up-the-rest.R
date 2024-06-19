@@ -34,3 +34,26 @@ order_Ca <- res_fish_tib |>
   dplyr::arrange(desc(conc_relative))
 
 order_Ca$Species
+
+
+order_Fe <- res_fish_tib |>
+  dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
+                  Zn + Sr + Cu + Mn + Se + Ni + Cd + As + Co +
+                  Ag + Pb) |>
+  tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                               Fe, Zn, Sr, Cu, Mn, Se,
+                               Ni, Cd, As, Co, 
+                               Ag, Pb), 
+                      names_to = "Nutrient", 
+                      values_to = "conc_mg_kg_dw") |> 
+  dplyr::filter(statistic == "mean") |>
+  dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
+                Nutrient = factor(Nutrient, 
+                                  levels = c("Ca", "P", "Mg", "Na", "K", 
+                                             "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
+                                             "Ni", "Cd", "As", "Co", 
+                                             "Ag", "Pb"))) |> 
+  dplyr::filter(Nutrient == "Fe") |>
+  dplyr::arrange(desc(conc_relative))
+
+order_Fe$Species

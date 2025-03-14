@@ -207,7 +207,8 @@ remove_tech_outliers_and_clean_names <- function(fish_compo_tib
     dplyr::filter(!(Code_sample %in% c("2005_PROTAND_PA03",
                                        "2010PII_ARCTRIS_CHA94_AR01"))) |>
     dplyr::mutate(Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
-                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata", 
+                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata",
+                                             Species == "Stomias sp" ~ "Stomias spp.", 
                                              TRUE ~ Species),
                   # name of species corrected by Yves Cherel after analysis
                   # completed
@@ -247,7 +248,14 @@ ID_under_loq_values <- function(fish_compo_tib
                   V = as.numeric(V),
                   Pb = as.numeric(Pb), 
                   Sr = as.numeric(Sr), 
-                  Ag = as.numeric(Ag)) |>
+                  Ag = as.numeric(Ag), 
+                  Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
+                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata",
+                                             Species == "Stomias sp" ~ "Stomias spp.", 
+                                             TRUE ~ Species)
+                  # name of species corrected by Yves Cherel after analysis
+                  # completed
+                  ) |>
     tidyr::pivot_longer(cols = c(Cr, Mo, V, 
                                  Ag, Pb, Cd, Sr,
                                  Ca, P, Mg, Na, K, 
@@ -266,7 +274,14 @@ ID_under_loq_values <- function(fish_compo_tib
     dplyr::select(-c(Cr, Mo, V)) |>
     dplyr::mutate(Pb = as.numeric(Pb), 
                   Sr = as.numeric(Sr), 
-                  Ag = as.numeric(Ag)) |>
+                  Ag = as.numeric(Ag), 
+                  Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
+                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata",
+                                             Species == "Stomias sp" ~ "Stomias spp.", 
+                                             TRUE ~ Species)
+                  # name of species corrected by Yves Cherel after analysis
+                  # completed
+                  ) |>
     tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
                                  Fe, Zn, Cu, Mn,
                                  As, Se, Ni, Co, 
@@ -306,11 +321,6 @@ table_compo_fish_samples_with_loq_replaced <- function(fish_compo_tib) {
                   Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
                                         # loq is 0.01 for all samples 
                                         TRUE ~ Pb),
-                  Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
-                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata", 
-                                             TRUE ~ Species),
-                  # name of species corrected by Yves Cherel after analysis
-                  # completed
                   Code_sample = dplyr::case_when(Species == "Mancopsetta maculata" ~ 
                                                    stringr::str_replace(Code_sample,
                                                                         "MANCMAN","MANCMAC"),
@@ -354,10 +364,7 @@ table_compo_fish_sp_without_loq_replaced <- function(fish_compo_tib) {
                         names_to = "statistic", 
                         values_to = "value") |>
     tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = value) |>
-    dplyr::mutate(Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
-                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata", 
-                                             TRUE ~ Species))
+                       values_from = value)
   
   openxlsx::write.xlsx(table, 
                        file = paste0("output/summary_fish_compo_sp_loq_not_replaced.xlsx"))
@@ -406,10 +413,7 @@ table_compo_fish_sp_with_loq_replaced <- function(fish_compo_tib) {
                         names_to = "statistic", 
                         values_to = "value") |>
     tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = value) |>
-    dplyr::mutate(Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
-                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata", 
-                                             TRUE ~ Species))
+                       values_from = value)
   
   openxlsx::write.xlsx(table, 
                        file = paste0("output/summary_fish_compo_sp_loq_replaced.xlsx"))

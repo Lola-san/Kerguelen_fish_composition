@@ -281,7 +281,7 @@ clust_compo_PCs_dendro <- function(res_pca,
   
   # identify species that are known to be prey of A. gazella
   compo_tib_full <- compo_tib_mean_sp |>
-    dplyr::mutate(Species_n = dplyr::case_when(Species == "Stomias sp" ~ paste0("*Stomias* spp.", 
+    dplyr::mutate(Species_n = dplyr::case_when(Species == "Stomias spp." ~ paste0("*Stomias* spp.", 
                                                                                 " (n = ", 
                                                                                 n, 
                                                                                 ")"), 

@@ -22,6 +22,7 @@ summary_samples <- function(sample_data,
     # add data on habitat as given on Fishbase + Yves Cherel expertise
     dplyr::mutate(Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
                                              Species == "Muraenolepis sp" ~ "Muraenolepis marmorata", 
+                                             Species == "Stomias sp" ~ "Stomias spp.",
                                              TRUE ~ Species),
                   # name of species corrected by Yves Cherel after analysis
                   # completed
@@ -43,7 +44,7 @@ summary_samples <- function(sample_data,
                                                             "Arctozenus risso",
                                                             "Notolepis coatsi",
                                                             "Idiacanthus atlanticus",
-                                                            "Stomias sp",
+                                                            "Stomias spp.",
                                                             "Melanostigma gelatinosum") ~ "Mesopelagic",
                                              Species %in% c("Gymnoscopelus nicholsi",
                                                             "Gymnoscopelus piabilis") ~ "Mesopelagic/epibenthic",

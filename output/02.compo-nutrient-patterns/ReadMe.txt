@@ -1,0 +1,2 @@
+Statistics for nutrient concentrations across all samples/species: 
+Note that in "summary_fish_compo_all_samples.xlsx" they were computed with all samples (raw data), whereas for "summary_fish_compo_all_mean_sp.xlsx" concentrations were averaged per species. The latter values are reported in the corresponding article, especially for CV (Gilbert et al. (2025) in Journal of Experimental Biology).  

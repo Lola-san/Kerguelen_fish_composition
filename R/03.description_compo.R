@@ -37,7 +37,7 @@ mean_per_species <- function(clean_summary_table) {
                                                             "Arctozenus risso",
                                                             "Notolepis coatsi",
                                                             "Idiacanthus atlanticus",
-                                                            "Stomias sp",
+                                                            "Stomias spp.",
                                                             "Melanostigma gelatinosum") ~ "Mesopelagic",
                                              Species %in% c("Gymnoscopelus nicholsi",
                                                             "Gymnoscopelus piabilis") ~ "Mesopelagic/epibenthic",
@@ -243,7 +243,7 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                                "Sr, Fe, Zn", 
                                "Cu, Mn, As, Ni, Se", 
                                "Cd, Co, Pb, Ag"))) |> 
-    dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
+    dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias spp.") ~ Species,
                                               TRUE ~ paste0(stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
                                                             ". ",
@@ -275,7 +275,7 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                                       "P. crassiceps",      
                                       "M. marmorata",
                                       "C. gunnari",   
-                                      "Stomias sp",
+                                      "Stomias spp.",
                                       "N. coatsi",
                                       "K. anderssoni",
                                       "M. gelatinosum",  
@@ -355,7 +355,7 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                                "Sr, Fe, Zn", 
                                "Cu, Mn, As, Ni, Se", 
                                "Cd, Co, Pb, Ag"))) |> 
-    dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
+    dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias spp.") ~ Species,
                                               TRUE ~ paste0(stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
                                                             ". ",
@@ -365,7 +365,7 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                                       # for Fe concentrations
                                       "A. risso", 
                                       "N. coatsi",
-                                      "Stomias sp",
+                                      "Stomias spp.",
                                       "P. bolini",
                                       "P. tenisoni",
                                       "K. anderssoni",
@@ -466,7 +466,7 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                                "Sr, Fe, Zn", 
                                "Cu, Mn, As, Ni, Se", 
                                "Cd, Co, Pb, Ag"))) |> 
-    dplyr::mutate(sp_short = dplyr::case_when(Species == "Stomias sp" ~ "*Stomias* spp.",
+    dplyr::mutate(sp_short = dplyr::case_when(Species == "Stomias spp." ~ "*Stomias* spp.",
                                               TRUE ~ paste0("*",
                                                             stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
@@ -595,7 +595,7 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                                "Fe, Zn, Cu, Mn", 
                                "Co, As, Ni, Se", 
                                "Sr, Cd, Pb, Ag"))) |> 
-    dplyr::mutate(sp_short = dplyr::case_when(Species == "Stomias sp" ~ "*Stomias* spp.",
+    dplyr::mutate(sp_short = dplyr::case_when(Species == "Stomias spp." ~ "*Stomias* spp.",
                                               TRUE ~ paste0("*",
                                                             stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
@@ -980,6 +980,10 @@ table_compo_fish_sp <- function(res_fish_tib
                      max = round(max(concentration_mg_kg_dw), 3), 
                      sd = round(sd(concentration_mg_kg_dw), 3), 
                      cv = round(sd(concentration_mg_kg_dw)/mean, 3)) |>
+    dplyr::mutate(Species = dplyr::case_when(Species == "Mancopsetta mancopsetta" ~ "Mancopsetta maculata", 
+                                             Species == "Muraenolepis sp" ~ "Muraenolepis marmorata",
+                                             Species == "Stomias sp" ~ "Stomias spp.", 
+                                             TRUE ~ Species)) |>
     tidyr::pivot_longer(cols = c(min, `2.5p_quant`, mean, `97.5p_quant`,
                                  max, sd, cv), 
                         names_to = "stat_variable", 
@@ -1010,7 +1014,7 @@ boxplot_compo_sp_all_nut <- function(res_fish_tib
                                  Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(Species_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
+    dplyr::mutate(Species_short = dplyr::case_when(Species %in% c("Stomias spp.") ~ Species,
                                                    TRUE ~ paste0(stringr::str_sub(Species, 
                                                                                   start = 1, end = 1),
                                                                  ". ",
@@ -1063,7 +1067,7 @@ boxplot_compo_sp_all_nut <- function(res_fish_tib
                                            "N. coatsi", 
                                            #Stomiidae  
                                            "I. atlanticus",
-                                           "Stomias sp",
+                                           "Stomias spp.",
                                            #Zoarcidae
                                            "M. gelatinosum")), 
                   Nutrient = factor(Nutrient, 
@@ -1139,7 +1143,7 @@ lineplot_compo_fish_sp_one_nut_grad <- function(res_fish_tib,
                                  Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(Species_short = dplyr::case_when(Species == "Stomias sp" ~ "Stomias spp.",
+    dplyr::mutate(Species_short = dplyr::case_when(Species == "Stomias spp." ~ Species,
                                                    TRUE ~ paste0(stringr::str_sub(Species, 
                                                                                   start = 1, end = 1),
                                                                  ". ",
@@ -1260,7 +1264,7 @@ lineplot_compo_fish_sp_one_nut_legend <- function(res_fish_tib,
                        start = 1, 
                        end = 1), ". ", 
       stringr::str_split_fixed(Species, " ", n = 2)[,2])) |>
-    dplyr::mutate(Species_short = dplyr::case_when(Species_short == "S. sp" ~ "Stomias spp.", 
+    dplyr::mutate(Species_short = dplyr::case_when(Species_short == "S. spp." ~ "Stomias spp.", 
                                                    TRUE ~ Species_short)) |>
     dplyr::group_by(Species_short) |>
     dplyr::mutate(n = dplyr::n_distinct(Code_sample),

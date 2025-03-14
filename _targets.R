@@ -81,6 +81,8 @@ list(
   # table with concentrations averaged per species 
   tar_target(table_fish_sp_conc_results_clean, 
              table_compo_fish_sp_with_loq_replaced(output_compo_notechoutliers)),
+  tar_target(table_fish_sp_conc_results_without_loq_replaced, 
+             table_compo_fish_sp_without_loq_replaced(output_compo_notechoutliers)),
   # add * on following species and nutrient values to indicate it includes
   # samples with conc < loq
   # Ag: Mancopsetta mancopsetta (1), Bathydraco antarcticus (1), 

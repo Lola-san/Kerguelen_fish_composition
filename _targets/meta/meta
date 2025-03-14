@@ -3,9 +3,9 @@ add_eco_habitat_sp|function|e700e68f7d62d369|||||||||||||||
 barplot_clust|function|5d2a574c7b353114|||||||||||||||
 barplot_comp_nut_prey_not_prey|function|32b38148ef3d86f2|||||||||||||||
 barplot_compo_CV|stem|169a17b8b9f28a0b|c068782d75be4e91|2d575801f69254a2|-1946174804||t19920.5665935554s|9ad0b176bfc1180e|100|rds|local|vector|||0.37||
-barplot_compo_relative|stem|ec49e8cf285eba0a|e05cbd9638baeb48|9e5805a7c551a713|163725715||t19920.5666989471s|1e38ab1d9f551fe5|127|rds|local|vector|||2.84||
+barplot_compo_relative|stem|ec49e8cf285eba0a|e05cbd9638baeb48|1d218451032006ce|163725715||t20161.3752839405s|1e38ab1d9f551fe5|127|rds|local|vector|||4.94||
 barplot_nut_CV|function|cd1ec6075aa10d7b|||||||||||||||
-barplot_nut_fish_compo_relative|function|0b3df62ba179f9a2|||||||||||||||
+barplot_nut_fish_compo_relative|function|e212238c6103666a|||||||||||||||
 biplot_after_clust|function|e41ecc7877e7510a|||||||||||||||
 biplot_pca_coda|function|ba88656976b4fb52|||||||||||||||
 biplot_pca_essentials|stem|49b6eed65d00add4|88acec2efc50d13f|111d0b465efd94ad|-2044128447||t20098.5057328302s|36d9ea1c8315d78b|96|rds|local|vector|||1.56||
@@ -32,28 +32,28 @@ boxplot_compo_fish_sp_one_nut_legend|function|e7cfa3b3d86ca56a|||||||||||||||
 boxplot_compo_fish_tot|function|a9e9e04b2d5c2684|||||||||||||||
 boxplot_compo_per_sp_all_nut|stem|250eeef5a82e564c|ce143b3f6fa5d6a6|9eeb68437c3ea62c|969017282||t19920.5665524579s|8781e7d3a4a21eb4|105|rds|local|vector|||17.44|Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purp|
 boxplot_compo_sp_all_nut|function|6f713b13de3236d6|||||||||||||||
-boxplot_fish_sp_nut_grad_Ag|stem|07e003f862b7640e|39371d662c875eb3|7031b5810f0851f8|1802136729||t19920.5662873103s|813d84234e908062|109|rds|local|vector|||2.89||
-boxplot_fish_sp_nut_grad_As|stem|fa8ebc17efbd00bd|4a8408482b2c71da|7031b5810f0851f8|-145434096||t19920.5663314451s|813d84234e908062|109|rds|local|vector|||0.43||
-boxplot_fish_sp_nut_grad_Ca|stem|e55f5d556ebfad88|b6912c049e9d7645|7031b5810f0851f8|1322414032||t19920.5663459339s|813d84234e908062|109|rds|local|vector|||0.4||
-boxplot_fish_sp_nut_grad_Cd|stem|8b0e42f2051878c7|1f49b22ab6155a32|7031b5810f0851f8|-2136571799||t19920.566350657s|813d84234e908062|109|rds|local|vector|||0.41||
-boxplot_fish_sp_nut_grad_Co|stem|0698102e15a08f71|76d3d45551b4fdde|7031b5810f0851f8|-1868575012||t19920.5665686653s|813d84234e908062|109|rds|local|vector|||0.45||
-boxplot_fish_sp_nut_grad_Cu|stem|c086f8b19b28ca95|ec7992298c3a2ab2|7031b5810f0851f8|2007695084||t19920.5665827445s|813d84234e908062|109|rds|local|vector|||0.39||
-boxplot_fish_sp_nut_grad_Fe|stem|fb2158b572dc6d49|7b3ae300eaef271e|7031b5810f0851f8|1900752520||t19920.5663410207s|813d84234e908062|109|rds|local|vector|||0.39||
-boxplot_fish_sp_nut_grad_K|stem|392532fa8024a99a|0a0c7eaad479d95c|7031b5810f0851f8|2013983981||t19920.5663065482s|809d88ef48c68ced|108|rds|local|vector|||0.44||
-boxplot_fish_sp_nut_grad_legend|stem|1b2a17584330041b|3f36ab8a53634b1d|7bbbb3ff66c312fb|-1741635265||t19920.5662966471s|b7d4d37884c593be|120|rds|local|vector|||0.8||
-boxplot_fish_sp_nut_grad_Mg|stem|fa5336bacc81905a|857d0f9ecbedca3b|7031b5810f0851f8|-780607570||t19920.5663262699s|813d84234e908062|109|rds|local|vector|||0.51||
-boxplot_fish_sp_nut_grad_Mn|stem|d7f9ca4ef90896ba|fadd68f39a602314|7031b5810f0851f8|-1385189595||t19920.5663362282s|813d84234e908062|109|rds|local|vector|||0.39||
-boxplot_fish_sp_nut_grad_Na|stem|aa2d2bf0266079d2|d4f0175c274b6839|7031b5810f0851f8|1056601668||t19920.5665575946s|813d84234e908062|109|rds|local|vector|||0.44||
-boxplot_fish_sp_nut_grad_Ni|stem|bd5a2e73d266ac12|5cd601aadd0a1f58|7031b5810f0851f8|-410600168||t19920.5665884359s|813d84234e908062|109|rds|local|vector|||0.49||
-boxplot_fish_sp_nut_grad_P|stem|738c55e8fb869138|d1fa4afcc45e61a2|7031b5810f0851f8|1111531337||t19920.5665632159s|809d88ef48c68ced|108|rds|local|vector|||0.47||
-boxplot_fish_sp_nut_grad_Pb|stem|7389b45f514c52b6|7067eb7a0e12baf5|7031b5810f0851f8|-959628756||t19920.5663109949s|813d84234e908062|109|rds|local|vector|||0.37||
-boxplot_fish_sp_nut_grad_Se|stem|14f694ecd8fc2843|b39fdbe1dec32336|7031b5810f0851f8|-473918126||t19920.5663011991s|813d84234e908062|109|rds|local|vector|||0.38||
-boxplot_fish_sp_nut_grad_Sr|stem|0b9956121d9af86b|3b0370b338249cbe|7031b5810f0851f8|1284948524||t19920.5663202724s|813d84234e908062|109|rds|local|vector|||0.4||
-boxplot_fish_sp_nut_grad_Zn|stem|41963cc2a43c3972|3984bbfb56bbfa95|7031b5810f0851f8|-626290679||t19920.5663156329s|813d84234e908062|109|rds|local|vector|||0.39||
+boxplot_fish_sp_nut_grad_Ag|stem|07e003f862b7640e|39371d662c875eb3|87b00b34d6f3cae1|1802136729||t20161.3527181686s|813d84234e908062|109|rds|local|vector|||2.31||
+boxplot_fish_sp_nut_grad_As|stem|fa8ebc17efbd00bd|4a8408482b2c71da|87b00b34d6f3cae1|-145434096||t20161.3530034567s|813d84234e908062|109|rds|local|vector|||0.44||
+boxplot_fish_sp_nut_grad_Ca|stem|e55f5d556ebfad88|b6912c049e9d7645|87b00b34d6f3cae1|1322414032||t20161.3530194171s|813d84234e908062|109|rds|local|vector|||0.47||
+boxplot_fish_sp_nut_grad_Cd|stem|8b0e42f2051878c7|1f49b22ab6155a32|87b00b34d6f3cae1|-2136571799||t20161.3530252199s|813d84234e908062|109|rds|local|vector|||0.48||
+boxplot_fish_sp_nut_grad_Co|stem|0698102e15a08f71|76d3d45551b4fdde|87b00b34d6f3cae1|-1868575012||t20161.3530407433s|813d84234e908062|109|rds|local|vector|||0.43||
+boxplot_fish_sp_nut_grad_Cu|stem|c086f8b19b28ca95|ec7992298c3a2ab2|87b00b34d6f3cae1|2007695084||t20161.3530460865s|813d84234e908062|109|rds|local|vector|||0.44||
+boxplot_fish_sp_nut_grad_Fe|stem|fb2158b572dc6d49|7b3ae300eaef271e|87b00b34d6f3cae1|1900752520||t20161.3530138212s|813d84234e908062|109|rds|local|vector|||0.43||
+boxplot_fish_sp_nut_grad_K|stem|392532fa8024a99a|0a0c7eaad479d95c|87b00b34d6f3cae1|2013983981||t20161.3529765457s|809d88ef48c68ced|108|rds|local|vector|||0.49||
+boxplot_fish_sp_nut_grad_legend|stem|1b2a17584330041b|3f36ab8a53634b1d|e7ad52ba51eb4b5d|-1741635265||t20161.3543367148s|b7d4d37884c593be|120|rds|local|vector|||2.79||
+boxplot_fish_sp_nut_grad_Mg|stem|fa5336bacc81905a|857d0f9ecbedca3b|87b00b34d6f3cae1|-780607570||t20161.3529983829s|813d84234e908062|109|rds|local|vector|||0.49||
+boxplot_fish_sp_nut_grad_Mn|stem|d7f9ca4ef90896ba|fadd68f39a602314|87b00b34d6f3cae1|-1385189595||t20161.3530088885s|813d84234e908062|109|rds|local|vector|||0.45||
+boxplot_fish_sp_nut_grad_Na|stem|aa2d2bf0266079d2|d4f0175c274b6839|87b00b34d6f3cae1|1056601668||t20161.3530303037s|813d84234e908062|109|rds|local|vector|||0.42||
+boxplot_fish_sp_nut_grad_Ni|stem|bd5a2e73d266ac12|5cd601aadd0a1f58|87b00b34d6f3cae1|-410600168||t20161.3530513707s|813d84234e908062|109|rds|local|vector|||0.46||
+boxplot_fish_sp_nut_grad_P|stem|738c55e8fb869138|d1fa4afcc45e61a2|87b00b34d6f3cae1|1111531337||t20161.3530355168s|809d88ef48c68ced|108|rds|local|vector|||0.44||
+boxplot_fish_sp_nut_grad_Pb|stem|7389b45f514c52b6|7067eb7a0e12baf5|87b00b34d6f3cae1|-959628756||t20161.3529815423s|813d84234e908062|109|rds|local|vector|||0.43||
+boxplot_fish_sp_nut_grad_Se|stem|14f694ecd8fc2843|b39fdbe1dec32336|87b00b34d6f3cae1|-473918126||t20161.3529707447s|813d84234e908062|109|rds|local|vector|||0.49||
+boxplot_fish_sp_nut_grad_Sr|stem|0b9956121d9af86b|3b0370b338249cbe|87b00b34d6f3cae1|1284948524||t20161.3529927419s|813d84234e908062|109|rds|local|vector|||0.41||
+boxplot_fish_sp_nut_grad_Zn|stem|41963cc2a43c3972|3984bbfb56bbfa95|87b00b34d6f3cae1|-626290679||t20161.3529874697s|813d84234e908062|109|rds|local|vector|||0.47||
 boxplot_id_outliers|stem|cbc49047941d8da9|e5ad2f3e555303cc|0212aa9546001c34|744740513||t19867.4041898549s|097df6ed47d18f96|107|rds|local|vector|||2.41|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 boxplot_id_outliers_stats|function|d8bb765552896a11|||||||||||||||
 clust_compo_PCs|function|e26b1a3fde1621a0|||||||||||||||
-clust_compo_PCs_dendro|function|7e6fb0707254eff8|||||||||||||||
+clust_compo_PCs_dendro|function|8b4788dfaa67eec8|||||||||||||||
 clust_compo_PCs_dendro_both|function|17810932f5d0512c|||||||||||||||
 clust_compo_PCs_dendro_both_nut|function|6e6f4cfb0cd09bc3|||||||||||||||
 clust_compo_PCs_dendro_fish|function|d46de9f4ffb35f66|||||||||||||||
@@ -75,10 +75,10 @@ densplot_compo_fish_tot|function|8f6230e24ae2567c|||||||||||||||
 fish_HC_essentials|stem|e97df58f904d7718|2c0b847b94a77efa|76727f6e629d1ccf|-471049352||t19886.6287396757s|402e589872025b0a|147|rds|local|vector|||0.08||
 fish_HC_essentials_biplot_k4|stem|80a049d91af4574f|f6f29d939eaf6244|b6292b43719c74df|-2020276552||t19893.6000271817s|dcf033efd1d1accc|101|rds|local|vector|||0.64|Unknown or uninitialised column Code_sample.|
 fish_HC_essentials_boxplots_k4|stem|da054e2016fc6842|1ed28142d1f90732|0d5eb405deeae28d|2087925948||t20101.6301300883s|813d84234e908062|109|rds|local|vector|||9.83|position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge|
-fish_HC_essentials_dendro_clust_k4|stem|bd9f31f528bf1392|23252eb396ddda44|dd4708149de28162|-134213817||t19893.5998411361s|f2de2469be356334|110|rds|local|vector|||0.48||
+fish_HC_essentials_dendro_clust_k4|stem|bd9f31f528bf1392|23252eb396ddda44|1fd82a009a122cf3|-134213817||t20161.3933025846s|f2de2469be356334|110|rds|local|vector|||1.3||
 fish_HC_essentials_dendro_diet_k4|stem|a6632240a1637ee4|5a3e332e8ac898f1|dd4708149de28162|1380809715||t19893.5998350487s|da7f33a0f827466a|104|rds|local|vector|||0.46||
 fish_HC_essentials_dendro_fam_k4|stem|ad95f0a6b83f50a6|9b6ee9a56b7a6c06|dd4708149de28162|1976374909||t19893.5998482345s|467e912dd1757136|106|rds|local|vector|||0.6||
-fish_HC_essentials_dendro_hab_k4|stem|a06b3e8c9ab6d5bd|5dffb1df92b39063|dd4708149de28162|-2085192652||t19893.5998297751s|097df6ed47d18f96|107|rds|local|vector|||0.53||
+fish_HC_essentials_dendro_hab_k4|stem|a06b3e8c9ab6d5bd|5dffb1df92b39063|dac71b009398190c|-2085192652||t19893.5998297751s||107|rds|local|vector|||0.67||ℹ In argument Species_n  dplyrcase_when....ℹ In group 1 Family  Achiropsettidae and Species  Mancopsetta  maculata.Caused by error in dplyrcase_when Failed to evaluate the righthand side of formula 2.Caused by error in paste0 argument manquant, sans valeur associée par défaut
 fish_HC_essentials_dendro_k4|stem|ad95f0a6b83f50a6|9b6ee9a56b7a6c06|b8e9d9961fbb8c8e|814510023||t19886.659763975s|467e912dd1757136|106|rds|local|vector|||0.42||
 fish_HC_essentials_find_k|stem|6ca66d92a03ed21b|4d29497bb56f7005|f2f02b8fd1e9a82e|-1899308875||t19887.2715935641s|65e096147ab2bae9|1079|rds|local|vector|||0.23||
 fish_HC_essentials_find_k_boxplot|stem|bc8a5758eadc2028|4b0da0cf3b0d43e0|d50484612f960aa1|138975188||t19886.6314624098s|e441caf5cebd5545|94|rds|local|vector|||1.64|Removed 18 rows containing nonfinite outside the scale rangestat_boxplot.|
@@ -88,7 +88,7 @@ fish_HC_essentials_MWtest_k4|stem|46c3ac1d9c994b33|cc095533442e1aa1|740ed318ea2d
 fish_HC_essentials_table_sp_attribution_k4|stem|1789c0b8bd6334e1|37945a0f4cbdb3f8|0fd77fd1d8742f21|-1908900816||t19893.6000196208s|6d86f30b4ba29a86|164341|rds|local|vector|||0.14||
 fish_HC_essentials_table_stats_k4|stem|93685cca87630ba1|e0dbfd66230e743f|808ba3b143b42a3a|1799392337||t19920.5668236722s|16f9b0bd75a320bc|1832|rds|local|vector|||0.23||
 fish_HC_with_non_essentials|stem|de6553a55e30a1af|c38140ce39805482|cee0673fcaf1ab2b|1478456441||t19893.599857824s|2d8e656ac7732c01|153|rds|local|vector|||0.16||
-fish_HC_with_non_essentials_dendro_clust_k4|stem|907545e3ed5c69f9|c60970d4b2ee22dc|573484c2bdc4a9ed|1201026974||t19893.5998712815s|809d88ef48c68ced|108|rds|local|vector|||0.45|Removed 8 rows containing missing values or values outside the scale rangegeom_segment.|
+fish_HC_with_non_essentials_dendro_clust_k4|stem|907545e3ed5c69f9|c60970d4b2ee22dc|58582fd1aa89d710|1201026974||t20161.3933095613s|809d88ef48c68ced|108|rds|local|vector|||0.59|Removed 8 rows containing missing values or values outside the scale rangegeom_segment.|
 fish_HC_with_non_essentials_dendro_fam_k4|stem|5e1a4dde4c3cc7a8|66f6032360132de9|573484c2bdc4a9ed|-870313545||t19893.5998797791s|da7f33a0f827466a|104|rds|local|vector|||0.72|Removed 8 rows containing missing values or values outside the scale rangegeom_segment.|
 fish_HC_with_non_essentials_dendro_k4|stem|5e1a4dde4c3cc7a8|66f6032360132de9|9ddb98234fdbdcda|-1075310344||t19886.6898444183s|da7f33a0f827466a|104|rds|local|vector|||1.03|Removed 8 rows containing missing values or values outside the scale rangegeom_segment.|
 fish_pca_essentials|stem|2f5b37da6c1e60b4|a0f343b55becbf41|8a20320d02c8c781|217584923||t19893.5998229599s|b9f8a406c1170442|5225|rds|local|vector|||0.06||
@@ -101,8 +101,8 @@ id_outliers_hist|stem|2d8b3a86a72b64ea|63ab3a878cf2f3c9|54b3895d6d79176e|1305415
 ID_under_loq_values|function|d82bd3d8e29843de|||||||||||||||
 lineplot_compare_compo_prey_not_prey_abs|function|db353dd378b181ab|||||||||||||||
 lineplot_compare_compo_prey_not_prey_mean_sp_abs|function|377c61545c7c381d|||||||||||||||
-lineplot_compo_fish_sp_one_nut_grad|function|cd4e2b1f2bedf83b|||||||||||||||
-lineplot_compo_fish_sp_one_nut_legend|function|2f2c9e70ae0a42c9|||||||||||||||
+lineplot_compo_fish_sp_one_nut_grad|function|ae50df24a7661eea|||||||||||||||
+lineplot_compo_fish_sp_one_nut_legend|function|c1a1d2351f09b474|||||||||||||||
 load_xl|function|e87653358e8b8f4b|||||||||||||||
 mean_per_species|function|f54a2aeaeea4de74|||||||||||||||
 means_clust_find_k_val|function|f74bf393e44cc2a8|||||||||||||||

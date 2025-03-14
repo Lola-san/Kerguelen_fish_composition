@@ -34,6 +34,8 @@ renv::install("kdensity")
 renv::install("wesanderson")
 renv::install("fpc")
 
+renv::install("ggtext")
+
 # checking for updates
 renv::status()
 

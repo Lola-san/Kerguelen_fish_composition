@@ -281,18 +281,17 @@ clust_compo_PCs_dendro <- function(res_pca,
   
   # identify species that are known to be prey of A. gazella
   compo_tib_full <- compo_tib_mean_sp |>
-    dplyr::mutate(Species_n = dplyr::case_when(Species == "Stomias sp" ~ paste0(Species, 
+    dplyr::mutate(Species_n = dplyr::case_when(Species == "Stomias sp" ~ paste0("*Stomias* spp.", 
                                                                                 " (n = ", 
                                                                                 n, 
                                                                                 ")"), 
-                                               TRUE ~ paste0(stringr::str_sub(stringr::str_split_fixed(Species, 
-                                                                                                       " ", 
-                                                                                                       n = 2)[,1], 
+                                               TRUE ~ paste0("*",
+                                                             stringr::str_sub(Species, 
                                                                               start = 1, 
                                                                               end = 1), 
                                                              ". ", 
                                                              stringr::str_split_fixed(Species, " ", n = 2)[,2], 
-                                                             " (n = ", 
+                                                             "* (n = ", 
                                                              n, 
                                                              ")")))
   
@@ -404,12 +403,20 @@ clust_compo_PCs_dendro <- function(res_pca,
     # plot dendrogram
     ggplot2::ggplot(dendro.dat$segments) + 
       ggplot2::geom_segment(ggplot2::aes(x = x, y = y, xend = xend, yend = yend))+
-      ggplot2::geom_text(data = dendro.labels, 
-                         ggplot2::aes(x, y, 
-                                      label = label, 
-                                      colour = Cluster),
-                         fontface = "italic",
-                         hjust = 1, size = 4) +
+      # ggplot2::geom_text(data = dendro.labels, 
+      #                    ggplot2::aes(x, y, 
+      #                                 label = label, 
+      #                                 colour = Cluster),
+      #                    fontface = "italic",
+      #                    hjust = 1, size = 4) +
+      ggtext::geom_richtext(data = dendro.labels, 
+                            ggplot2::aes(x, y, 
+                                         label = label, 
+                                         colour = Cluster), 
+                            hjust = 1, 
+                            size = 3.9, 
+                            fill = NA, label.color = NA # remove background and outline
+                            ) +
       ggplot2::scale_color_manual(values = colour_palette) +
       ggplot2::coord_flip() +
       ggplot2::ylim(-6.8, 6) +

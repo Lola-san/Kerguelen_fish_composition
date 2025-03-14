@@ -66,6 +66,7 @@ mean_per_species <- function(clean_summary_table) {
                                                                         "Gymnoscopelus bolini", 
                                                                         "Gymnoscopelus braueri", 
                                                                         "Gymnoscopelus fraseri",
+                                                                        "Gymnoscopelus nicholsi",
                                                                         "Gymnoscopelus piabilis",
                                                                         "Krefftichthys anderssoni",
                                                                         "Protomyctophum andriashevi",
@@ -75,13 +76,14 @@ mean_per_species <- function(clean_summary_table) {
                                                                         "Dissostichus eleginoides",
                                                                         "Gobionotothen acuta",
                                                                         "Lepidonotothen squamifrons",
+                                                                        "Lindbergichthys mizops",
                                                                         "Melanostigma gelatinosum") ~ "yes",
                                                          TRUE ~ "no")) |>
     dplyr::select(Habitat, Family, Species, n, confirmed_forage_sp,
-                  Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, As, Co, 
-                  Ag, Pb)
+                  Ca, P, Na, K, Mg, 
+                  Fe, Zn, Cu, Mn,
+                  As, Se, Ni, Co, 
+                  Sr, Cd, Pb, Ag)
   
 }
 
@@ -99,14 +101,14 @@ density_plot_all_nut <- function(res_fish_tib) {
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
                                  Fe, Zn, Sr, Cu, Mn, Se,
                                  Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::mutate(Nutrient = factor(Nutrient, 
                                     levels = c("Ca", "P", "Na", "K", "Mg", 
                                                "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se", "Co",
-                                               "Sr", "Cd", "Ag", "Pb"))) |>
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Cd", "Pb", "Ag"))) |>
     ggplot2::ggplot(ggplot2::aes(x = concentration_mg_kg_dw,
                                  fill = Nutrient, 
                                  color = Nutrient)) +
@@ -154,14 +156,14 @@ density_plot_all_nut <- function(res_fish_tib) {
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
                                  Fe, Zn, Sr, Cu, Mn, Se,
                                  Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "mean_sp_conc_mg_kg_dw") |>
     dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
                                                "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb"))) |>
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Cd", "Pb", "Ag"))) |>
     dplyr::group_by(Nutrient) |>
     dplyr::mutate(norm_conc = (mean_sp_conc_mg_kg_dw - min(mean_sp_conc_mg_kg_dw))/
                     (max(mean_sp_conc_mg_kg_dw) - min(mean_sp_conc_mg_kg_dw))) |>
@@ -222,25 +224,25 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
                                  Fe, Zn, Sr, Cu, Mn, Se,
                                  Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "conc_mg_kg_dw") |> 
     dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
                   Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
                                                "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb")),
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Cd", "Pb", "Ag")),
                   micro_macro = factor(dplyr::case_when(
                     Nutrient %in% c("Ca", "P", "Na", 
                                     "K", "Mg") ~ "Ca, P, Na, K, Mg", 
                     Nutrient %in% c("Fe", "Zn", "Sr") ~ "Sr, Fe, Zn", 
                     Nutrient %in% c("Cu", "Mn", "As", "Ni", "Se") ~ "Cu, Mn, As, Ni, Se",  
-                    Nutrient %in% c("Cd", "Co", "Ag", "Pb") ~ "Cd, Co, Ag, Pb"), 
+                    Nutrient %in% c("Cd", "Co", "Pb", "Ag") ~ "Cd, Co, Pb, Ag"), 
                     levels = c("Ca, P, Na, K, Mg", 
                                "Sr, Fe, Zn", 
                                "Cu, Mn, As, Ni, Se", 
-                               "Cd, Co, Ag, Pb"))) |> 
+                               "Cd, Co, Pb, Ag"))) |> 
     dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
                                               TRUE ~ paste0(stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
@@ -334,25 +336,25 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
                                  Fe, Zn, Sr, Cu, Mn, Se,
                                  Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "conc_mg_kg_dw") |> 
     dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
                   Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
                                                "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb")),
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Cd", "Pb", "Ag")),
                   micro_macro = factor(dplyr::case_when(
                     Nutrient %in% c("Ca", "P", "Na", 
                                     "K", "Mg") ~ "Ca, P, Na, K, Mg", 
                     Nutrient %in% c("Fe", "Zn", "Sr") ~ "Sr, Fe, Zn", 
                     Nutrient %in% c("Cu", "Mn", "As", "Ni", "Se") ~ "Cu, Mn, As, Ni, Se",  
-                    Nutrient %in% c("Cd", "Co", "Ag", "Pb") ~ "Cd, Co, Ag, Pb"), 
+                    Nutrient %in% c("Cd", "Co", "Pb", "Ag") ~ "Cd, Co, Pb, Ag"), 
                     levels = c("Ca, P, Na, K, Mg", 
                                "Sr, Fe, Zn", 
                                "Cu, Mn, As, Ni, Se", 
-                               "Cd, Co, Ag, Pb"))) |> 
+                               "Cd, Co, Pb, Ag"))) |> 
     dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
                                               TRUE ~ paste0(stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
@@ -443,27 +445,27 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                     Zn + Sr + Cu + Mn + Se + Ni + Cd + As + Co +
                     Ag + Pb) |>
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "conc_mg_kg_dw") |> 
     dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
                   Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
-                                               "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb")),
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
+                                               "Sr", "Fe", "Zn",
+                                               "Cu", "Mn", "As", "Ni", "Se",
+                                               "Cd", "Co", "Pb", "Ag")),
                   micro_macro = factor(dplyr::case_when(
                     Nutrient %in% c("Ca", "P", "Na", 
                                     "K", "Mg") ~ "Ca, P, Na, K, Mg", 
                     Nutrient %in% c("Fe", "Zn", "Sr") ~ "Sr, Fe, Zn", 
                     Nutrient %in% c("Cu", "Mn", "As", "Ni", "Se") ~ "Cu, Mn, As, Ni, Se",  
-                    Nutrient %in% c("Cd", "Co", "Ag", "Pb") ~ "Cd, Co, Ag, Pb"), 
+                    Nutrient %in% c("Cd", "Co", "Pb", "Ag") ~ "Cd, Co, Pb, Ag"), 
                     levels = c("Ca, P, Na, K, Mg", 
                                "Sr, Fe, Zn", 
                                "Cu, Mn, As, Ni, Se", 
-                               "Cd, Co, Ag, Pb"))) |> 
+                               "Cd, Co, Pb, Ag"))) |> 
     dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
                                               TRUE ~ paste0(stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
@@ -571,22 +573,27 @@ barplot_nut_fish_compo_relative <- function(res_fish_tib) {
                     Zn + Sr + Cu + Mn + Se + Ni + Cd + As + Co +
                     Ag + Pb) |>
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "conc_mg_kg_dw") |> 
     dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
+                  Nutrient = factor(Nutrient, 
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Cd", "Pb", "Ag")),
                   micro_macro = factor(dplyr::case_when(
                     Nutrient %in% c("Ca", "P", "Na", 
                                     "K", "Mg") ~ "Ca, P, Na, K, Mg", 
                     Nutrient %in% c("Fe", "Zn", "Cu", "Mn") ~ "Fe, Zn, Cu, Mn", 
                     Nutrient %in% c("As", "Ni", "Se", "Co") ~ "Co, As, Ni, Se",  
-                    Nutrient %in% c("Sr", "Cd", "Ag", "Pb") ~ "Sr, Cd, Ag, Pb"), 
+                    Nutrient %in% c("Sr", "Cd", "Pb", "Ag") ~ "Sr, Cd, Pb, Ag"), 
                     levels = c("Ca, P, Na, K, Mg", 
                                "Fe, Zn, Cu, Mn", 
                                "Co, As, Ni, Se", 
-                               "Sr, Cd, Ag, Pb"))) |> 
+                               "Sr, Cd, Pb, Ag"))) |> 
     dplyr::mutate(sp_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
                                               TRUE ~ paste0(stringr::str_sub(Species, 
                                                                              start = 1, end = 1),
@@ -706,9 +713,9 @@ table_nut_fish_compo_relative <- function(res_fish_tib) {
                     Zn + Sr + Cu + Mn + Se + Ni + Cd + As + Co +
                     Ag + Pb) |>
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "conc_mg_kg_dw") |> 
     dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut) |>
@@ -727,8 +734,7 @@ table_nut_fish_compo_relative <- function(res_fish_tib) {
 #'
 #'
 #'
-# function to create barplot displaying CV for major and trace nutrients in
-# both scats and prey
+# function to create barplot displaying CV for major and trace nutrients 
 barplot_nut_CV <- function(res_fish_tib
 ) {
   
@@ -736,16 +742,16 @@ barplot_nut_CV <- function(res_fish_tib
   
   res_fish_tib |>
     tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::mutate(Nutrient = factor(Nutrient, 
                                     levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
                                                "Fe", "Zn", "Cu", "Mn",
                                                "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb")), 
+                                               "Cd", "Co", "Pb", "Ag")), 
                   major_or_trace = dplyr::case_when(Nutrient %in% c("Ca", "P", 
                                                                     "Na", "K", 
                                                                     "Mg", "Sr") ~ "Major", 
@@ -754,7 +760,7 @@ barplot_nut_CV <- function(res_fish_tib
                                                                     "Se", "As", 
                                                                     "Ni","Co", 
                                                                     "Cd",
-                                                                    "Ag", "Pb") ~ "Trace")) |>
+                                                                    "Pb", "Ag") ~ "Trace")) |>
     dplyr::group_by(major_or_trace, Nutrient) |>
     dplyr::summarise(mean = round(mean(concentration_mg_kg_dw), 2),
                      sd = round(sd(concentration_mg_kg_dw), 2), 
@@ -801,13 +807,13 @@ corr_compo_fish <- function(res_fish_tib) {
                     dplyr::select(c(Ca, P, Na, K, Mg, 
                                     Fe, Zn, Cu, Mn,
                                     As, Ni, Se, Co,
-                                    Sr, Cd, Ag, Pb 
+                                    Sr, Cd, Pb, Ag 
                     )))) 
   
   colnames(corr_mat) <- rownames(corr_mat) <- c("Ca", "P", "Na", "K", "Mg", 
                                                 "Fe", "Zn", "Cu", "Mn",
-                                                "As", "Ni", "Se", "Co",
-                                                "Sr", "Cd", "Ag", "Pb")
+                                                "As", "Se", "Ni", "Co",
+                                                "Sr", "Cd", "Pb", "Ag")
   
   get_lower_tri<-function(cormat){
     cormat[lower.tri(cormat)] <- NA
@@ -816,6 +822,9 @@ corr_compo_fish <- function(res_fish_tib) {
   
   melted_cormat1 <- tibble::as_tibble(reshape2::melt(get_lower_tri(corr_mat), 
                                                     na.rm = TRUE)) 
+  # save for supplementary material
+  openxlsx::write.xlsx(melted_cormat1, 
+                       file = "output/02.compo-nutrient-patterns/fish_correlation_nutrient_conc.xlsx")
     
   
   ggplot2::ggplot(data = melted_cormat1, ggplot2::aes(Var2, Var1, fill = value)) +
@@ -844,12 +853,12 @@ corr_compo_fish <- function(res_fish_tib) {
   
   melted_cormat2 <- tibble::as_tibble(reshape2::melt(get_lower_tri(corr_mat), 
                                                     na.rm = TRUE)) |>
-    dplyr::mutate(value = factor(dplyr::case_when(value > 0.35 ~ "> 0.5", 
-                                                  value < -0.35 ~ "< -0.5", 
-                                                  TRUE ~ "[-0.5;0.5]"), 
-                                 levels = c("< -0.5", 
-                                            "[-0.5;0.5]", 
-                                            "> 0.5")))
+    dplyr::mutate(value = factor(dplyr::case_when(value > 0.4 ~ "> 0.4", 
+                                                  value < -0.4 ~ "< -0.4", 
+                                                  TRUE ~ "[-0.4;0.4]"), 
+                                 levels = c("< -0.4", 
+                                            "[-0.4;0.4]", 
+                                            "> 0.4")))
   
   
   ggplot2::ggplot(data = melted_cormat2, ggplot2::aes(Var2, Var1, fill = value)) +
@@ -883,16 +892,16 @@ corr_compo_fish <- function(res_fish_tib) {
 #'
 #'
 #'
-# function to display boxplot of elemental composition per species
+# function to generate table of elemental composition per species
 table_compo_fish_sp <- function(res_fish_tib
 ) {
   
   
   table_all_samples <- res_fish_tib |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co,
+                                 Sr, Cd, Pb, Ag), 
                         names_to = 'Nutrient', 
                         values_to = "concentration_mg_kg_dw") |>
     ## remove NAs if there is still some
@@ -917,11 +926,44 @@ table_compo_fish_sp <- function(res_fish_tib
   openxlsx::write.xlsx(table_all_samples, 
                        file = "output/02.compo-nutrient-patterns/summary_fish_compo_all_samples.xlsx")
   
+  # all samples but with averaging by species before 
+  table_all_samples <- res_fish_tib |>
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co,
+                                 Sr, Cd, Pb, Ag), 
+                        names_to = 'Nutrient', 
+                        values_to = "concentration_mg_kg_dw") |>
+    ## remove NAs if there is still some
+    #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
+    dplyr::group_by(Species, Nutrient) |>
+    dplyr::summarise(mean_sp = round(mean(concentration_mg_kg_dw), 3)) |>
+    dplyr::group_by(Nutrient) |>
+    dplyr::summarise(min = round(min(mean_sp), 3), 
+                     `2.5p_quant` = round(quantile(mean_sp, 
+                                                   probs = c(0.025)), 3),
+                     mean = round(mean(mean_sp), 3),
+                     `97.5p_quant` = round(quantile(mean_sp, 
+                                                    probs = c(0.975)), 3),
+                     max = round(max(mean_sp), 3), 
+                     sd = round(sd(mean_sp), 3), 
+                     cv = round(sd(mean_sp)/mean, 3)) |>
+    tidyr::pivot_longer(cols = c(min, `2.5p_quant`, mean, `97.5p_quant`,
+                                 max, sd, cv), 
+                        names_to = "stat_variable", 
+                        values_to = "stat_value") |>
+    tidyr::pivot_wider(names_from = "Nutrient", 
+                       values_from = "stat_value")
+  
+  openxlsx::write.xlsx(table_all_samples, 
+                       file = "output/02.compo-nutrient-patterns/summary_fish_compo_all_mean_sp.xlsx")
+  
+  
   table_sp <- res_fish_tib |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Ni, Se, Co,
+                                 Sr, Cd, Pb, Ag), 
                         names_to = 'Nutrient', 
                         values_to = "concentration_mg_kg_dw") |>
     ## remove NAs if there is still some
@@ -960,10 +1002,10 @@ boxplot_compo_sp_all_nut <- function(res_fish_tib
 ) {
   
   res_fish_tib |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Ni, Se, Co,
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::mutate(Species_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
@@ -1026,7 +1068,7 @@ boxplot_compo_sp_all_nut <- function(res_fish_tib
                                     levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
                                                "Fe", "Zn", "Cu", "Mn",
                                                "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb"))) |>
+                                               "Cd", "Co", "Pb", "Ag"))) |>
     dplyr::group_by(Species_short) |>
     dplyr::mutate(n = dplyr::n_distinct(Code_sample),
                   Speciesn = paste0(Species_short, " (n = ", n, ")")) |>
@@ -1077,10 +1119,10 @@ lineplot_compo_fish_sp_one_nut_grad <- function(res_fish_tib,
   
   # calculate median for all species
   mean_med_allsp <- res_fish_tib |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Ni, Se, Co,
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::filter(Nutrient == nutrient) |>
@@ -1089,13 +1131,13 @@ lineplot_compo_fish_sp_one_nut_grad <- function(res_fish_tib,
   
   
   res_fish_tib |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Ni, Se, Co,
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(Species_short = dplyr::case_when(Species %in% c("Stomias sp") ~ Species,
+    dplyr::mutate(Species_short = dplyr::case_when(Species == "Stomias sp" ~ "Stomias spp.",
                                                    TRUE ~ paste0(stringr::str_sub(Species, 
                                                                                   start = 1, end = 1),
                                                                  ". ",
@@ -1107,7 +1149,7 @@ lineplot_compo_fish_sp_one_nut_grad <- function(res_fish_tib,
                                       # for Fe concentrations
                                       "A. risso (n = 2)", 
                                       "N. coatsi (n = 10)",
-                                      "Stomias sp (n = 10)",
+                                      "Stomias spp. (n = 10)",
                                       "P. bolini (n = 10)",
                                       "P. tenisoni (n = 10)",
                                       "K. anderssoni (n = 4)",
@@ -1203,10 +1245,10 @@ lineplot_compo_fish_sp_one_nut_legend <- function(res_fish_tib,
 ) {
   
   res_fish_tib |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Ni, Se, Co,
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::mutate(Species_short = paste0(
@@ -1315,10 +1357,10 @@ boxplot_compo_fish_fam <- function(res_fish_tib,
                                    nutrient) {
   
   res_fish_tib |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, As, Co, 
-                                 Ag, Pb), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Ni, Se, Co,
+                                 Sr, Cd, Pb, Ag), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::group_by(Family) |>
@@ -1681,636 +1723,5 @@ boxplot_compo_fish_tot <- function(res_fish_tib) {
                   scale = 1,
                   height = 12, width = 17
   )
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compare composition of fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-table_compare_compo_prey_not_prey_abs <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  table <- res_fish_tib |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(type = factor(dplyr::case_when(diet == 1 ~ "fish species identied as fur seal prey", 
-                                                 diet == 0 ~ "fish species never identied as fur seal prey"), 
-                                levels = c("fish species never identied as fur seal prey", 
-                                           "fish species identied as fur seal prey"))) |>
-    dplyr::group_by(Nutrient, type) |>
-    dplyr::summarise(mean = round(mean(concentration_mg_kg_dw), 2), 
-                     median = round(median(concentration_mg_kg_dw), 2), 
-                     `2.5% quantile` = round(quantile(concentration_mg_kg_dw, 
-                                                      probs = c(0.025)), 2), 
-                     `97.5% quantile` = round(quantile(concentration_mg_kg_dw, 
-                                                       probs = c(0.975)), 2),
-                     sd = round(sd(concentration_mg_kg_dw), 2), 
-                     cv = round(sd/mean, 3)) |>
-    tidyr::pivot_longer(cols = c(mean:cv), 
-                        names_to = "Statistic",
-                        values_to = "value") |>
-    dplyr::mutate(Statistic = factor(Statistic, 
-                                     levels = c("mean", "median", "sd", "cv",
-                                                "2.5% quantile", "97.5% quantile"))) |>
-    tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = value) |>
-    dplyr::arrange(type, Statistic)
-  
-  openxlsx::write.xlsx(table, 
-                       file = "output/compo fish/stats_comp_prey_vs_not_prey.xlsx")
-  
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# function to create barplot displaying CV for major and trace nutrients in
-# both scats and prey
-barplot_comp_nut_prey_not_prey <- function(res_fish_tib
-) {
-  
-  options(scipen = 999)
-  
-  res_fish_tib |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", 
-                                               "Fe", "Zn", "Cu", "Mn", "Se",
-                                               "As", "Ni","Co")), 
-                  major_or_trace = dplyr::case_when(Nutrient %in% c("Ca", "P", 
-                                                                    "Na", "K", 
-                                                                    "Mg") ~ "Major", 
-                                                    Nutrient %in% c("Fe", "Zn",
-                                                                    "Cu", "Mn", 
-                                                                    "Se", "As", 
-                                                                    "Ni","Co") ~ "Trace"), 
-                  type = factor(dplyr::case_when(diet == 1 ~ "fish species identied as fur seal prey", 
-                                                 diet == 0 ~ "fish species never identied as fur seal prey"), 
-                                levels = c("fish species never identied as fur seal prey", 
-                                           "fish species identied as fur seal prey"))) |>
-    dplyr::group_by(Nutrient) |>
-    dplyr::mutate(conc_norm = (concentration_mg_kg_dw - min(concentration_mg_kg_dw))/
-                    (max(concentration_mg_kg_dw) - min(concentration_mg_kg_dw))) |>
-    dplyr::group_by(major_or_trace, Nutrient, type) |>
-    dplyr::summarise(mean = round(mean(concentration_mg_kg_dw), 2), 
-                     mean_norm = round(mean(conc_norm), 2),
-                     `2.5_quant_norm` = round(quantile(conc_norm, 
-                                                       probs = c(0.025)), 2), 
-                     `97.5_quant_norm` = round(quantile(conc_norm, 
-                                                        probs = c(0.975)), 2),
-                     sd = round(sd(concentration_mg_kg_dw), 2), 
-                     cv = round(sd/mean, 3)) |>
-    ggplot2::ggplot() +
-    ggplot2::geom_bar(ggplot2::aes(x = Nutrient, 
-                                   y = cv, 
-                                   fill = major_or_trace), 
-                      stat = "identity") +
-    ggplot2::geom_linerange(ggplot2::aes(x = Nutrient, 
-                                         ymin = `2.5_quant_norm`, 
-                                         ymax = `97.5_quant_norm`), 
-                            linewidth = 1, 
-                            color = "#B4DAE5FF", 
-                            position = ggplot2::position_dodge(0.5)) +
-    ggplot2::geom_point(ggplot2::aes(x = Nutrient, 
-                                     y = mean_norm), 
-                        size = 3, 
-                        color = "#B4DAE5FF", 
-                        position = ggplot2::position_dodge(0.5)) +
-    ggplot2::scale_fill_manual(values = c("Major" = "#DE7862FF", 
-                                          "Trace" = "#1D2645FF")) +
-    ggplot2::facet_wrap(~ type) +
-    ggplot2::ylab("Coefficient of variation") +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 16), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
-                   strip.text = ggplot2::element_text(size = 15),
-                   legend.title = ggplot2::element_blank(), 
-                   legend.text = ggplot2::element_text(size = 15), 
-                   legend.key.height = ggplot2::unit(1, "cm")
-    )
-  ggplot2::ggsave("output/compo fish/Cv_per_nut_comp_prey_vs_not_prey.jpg",
-                  scale = 1,
-                  height = 4, width = 11
-  )
-  
-  
-  
-  
-}
-
-
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compare composition of fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-lineplot_compare_compo_prey_not_prey_abs <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  res_fish_tib |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(type = factor(dplyr::case_when(diet == 1 ~ "fish species identied as fur seal prey", 
-                                                 diet == 0 ~ "fish species never identied as fur seal prey"), 
-                                levels = c("fish species never identied as fur seal prey", 
-                                           "fish species identied as fur seal prey")), 
-                  Nutrient = factor(Nutrient, 
-                                    levels = c("Co", "Ni", "As", "Se", "Mn",
-                                               "Cu", "Zn", "Fe", "Mg", "K",
-                                               "Na", "P", "Ca"))) |>
-    dplyr::group_by(Nutrient) |>
-    dplyr::mutate(conc_norm = (concentration_mg_kg_dw - min(concentration_mg_kg_dw))/
-                    (max(concentration_mg_kg_dw) - min(concentration_mg_kg_dw))) |>
-    dplyr::group_by(Nutrient, type) |>
-    dplyr::summarise(mean = round(mean(concentration_mg_kg_dw), 2), 
-                     median = round(mean(concentration_mg_kg_dw), 2),
-                     `2.5_quant` = round(quantile(concentration_mg_kg_dw, 
-                                                  probs = c(0.025)), 2), 
-                     `97.5_quant` = round(quantile(concentration_mg_kg_dw, 
-                                                   probs = c(0.975)), 2),
-                     mean_norm = round(mean(conc_norm), 2),
-                     median_norm = round(mean(conc_norm), 2),
-                     `2.5_quant_norm` = round(quantile(conc_norm, 
-                                                       probs = c(0.025)), 2), 
-                     `97.5_quant_norm` = round(quantile(conc_norm, 
-                                                        probs = c(0.975)), 2),
-                     sd = round(sd(concentration_mg_kg_dw), 2), 
-                     cv = round(sd/mean, 3)) |>
-    ggplot2::ggplot() +
-    ggplot2::geom_linerange(ggplot2::aes(x = Nutrient, 
-                                         ymin = `2.5_quant`, 
-                                         ymax = `97.5_quant`, 
-                                         color = type), 
-                            linewidth = 2, 
-                            position = ggplot2::position_dodge(0.5)) +
-    ggplot2::geom_point(ggplot2::aes(x = Nutrient, 
-                                     y = median, 
-                                     color = type), 
-                        size = 3, 
-                        position = ggplot2::position_dodge(0.5)) +
-    ggplot2::coord_flip() +
-    ggplot2::scale_y_continuous(trans = "log10") +
-    ggplot2::scale_color_manual(values = c("fish species identied as fur seal prey" = "#278B9AFF", 
-                                           "fish species never identied as fur seal prey" = "#B4DAE5FF")) +
-    ggplot2::guides(color = ggplot2::guide_legend(nrow = 2)) +
-    ggplot2::ylab(paste0("Concentration (in mg/kg dry weight)")) +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 15), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
-                   legend.position = "bottom",
-                   legend.title = ggplot2::element_blank(),
-                   legend.text = ggplot2::element_text(size = 15)
-    )
-  ggplot2::ggsave("output/compo fish/lineplot_compo_prey_vs_not_prey_abs.jpg",
-                  scale = 1,
-                  height = 6, width = 5
-  )
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compare composition of fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-lineplot_compare_compo_prey_not_prey_mean_sp_abs <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  res_fish_tib |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(type = factor(dplyr::case_when(diet == 1 ~ "fish species identied as fur seal prey", 
-                                                 diet == 0 ~ "fish species never identied as fur seal prey"), 
-                                levels = c("fish species never identied as fur seal prey", 
-                                           "fish species identied as fur seal prey")), 
-                  Nutrient = factor(Nutrient, 
-                                    levels = c("Co", "Ni", "As", "Se", "Mn",
-                                               "Cu", "Zn", "Fe", "Mg", "K",
-                                               "Na", "P", "Ca"))) |>
-    dplyr::group_by(Nutrient) |>
-    dplyr::mutate(conc_norm = (concentration_mg_kg_dw - min(concentration_mg_kg_dw))/
-                    (max(concentration_mg_kg_dw) - min(concentration_mg_kg_dw))) |>
-    dplyr::group_by(type, Species, Nutrient) |>
-    dplyr::summarise(mean_sp = mean(concentration_mg_kg_dw)) |>
-    dplyr::group_by(Nutrient, type) |>
-    dplyr::summarise(mean = round(mean(mean_sp), 2), 
-                     median = round(mean(mean_sp), 2),
-                     `2.5_quant` = round(quantile(mean_sp, 
-                                                  probs = c(0.025)), 2), 
-                     `97.5_quant` = round(quantile(mean_sp, 
-                                                   probs = c(0.975)), 2)) |>
-    ggplot2::ggplot() +
-    ggplot2::geom_linerange(ggplot2::aes(x = Nutrient, 
-                                         ymin = `2.5_quant`, 
-                                         ymax = `97.5_quant`, 
-                                         color = type), 
-                            linewidth = 2, 
-                            position = ggplot2::position_dodge(0.5)) +
-    ggplot2::geom_point(ggplot2::aes(x = Nutrient, 
-                                     y = median, 
-                                     color = type), 
-                        size = 3, 
-                        position = ggplot2::position_dodge(0.5)) +
-    ggplot2::coord_flip() +
-    ggplot2::scale_y_continuous(trans = "log10") +
-    ggplot2::scale_color_manual(values = c("fish species identied as fur seal prey" = "#278B9AFF", 
-                                           "fish species never identied as fur seal prey" = "#B4DAE5FF")) +
-    ggplot2::guides(color = ggplot2::guide_legend(nrow = 2)) +
-    ggplot2::ylab(paste0("Concentration (in mg/kg dry weight)")) +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 15), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
-                   legend.position = "bottom",
-                   legend.title = ggplot2::element_blank(),
-                   legend.text = ggplot2::element_text(size = 15)
-    )
-  ggplot2::ggsave("output/compo fish/lineplot_compo_prey_vs_not_prey_mean_sp_abs.jpg",
-                  scale = 1,
-                  height = 5, width = 5
-  )
-  
-}
-
-
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compare composition of fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-boxplot_compare_compo_prey_not_prey_abs <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  res_fish_tib |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(type = factor(dplyr::case_when(diet == 1 ~ "fish species identied as fur seal prey", 
-                                                 diet == 0 ~ "fish species never identied as fur seal prey"), 
-                                levels = c("fish species never identied as fur seal prey", 
-                                           "fish species identied as fur seal prey")), 
-                  Nutrient = factor(Nutrient, 
-                                    levels = c("Co", "Ni", "As", "Se", "Mn",
-                                               "Cu", "Zn", "Fe", "Mg", "K",
-                                               "Na", "P", "Ca"))) |>
-    dplyr::group_by(Nutrient) |>
-    dplyr::mutate(conc_norm = (concentration_mg_kg_dw - min(concentration_mg_kg_dw))/
-                    (max(concentration_mg_kg_dw) - min(concentration_mg_kg_dw))) |>
-    ggplot2::ggplot() +
-    ggplot2::geom_boxplot(ggplot2::aes(x = Nutrient, 
-                                       y = conc_norm, 
-                                       color = type), 
-                          size = 3, 
-                          position = ggplot2::position_dodge(0.5)) +
-    ggplot2::coord_flip() +
-    ggplot2::scale_color_manual(values = c("fish species identied as fur seal prey" = "#278B9AFF", 
-                                           "fish species never identied as fur seal prey" = "#B4DAE5FF")) +
-    ggplot2::ylab(paste0("Concentration (in mg/kg dry weight)")) +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 15), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
-                   legend.position = "bottom",
-                   legend.title = ggplot2::element_blank(),
-                   legend.text = ggplot2::element_text(size = 15)
-    )
-  ggplot2::ggsave("output/compo fish/boxplot_compo_prey_vs_not_prey_abs.jpg",
-                  scale = 1,
-                  height = 8, width = 9
-  )
-  
-}
-
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compare composition of fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-boxplot_compare_compo_prey_not_prey_rel <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  res_fish_tib |>
-    dplyr::mutate(sum = As + Co + Cu + Fe + 
-                    Mn + Ni + Se + Zn) |>
-    tidyr::pivot_longer(cols = c(As, Co, Cu, Fe, Mn, Ni, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(type = factor(dplyr::case_when(diet == 1 ~ "fish species identied as fur seal prey", 
-                                                 diet == 0 ~ "fish species never identied as fur seal prey"), 
-                                levels = c("fish species never identied as fur seal prey", 
-                                           "fish species identied as fur seal prey"))) |>
-    ggplot2::ggplot(ggplot2::aes(x = reorder(Nutrient, 
-                                             concentration_mg_kg_dw), 
-                                 y = concentration_mg_kg_dw, fill = type)) +
-    ggplot2::geom_boxplot() +
-    ggplot2::coord_flip() +
-    ggplot2::scale_fill_manual(values = c("fish species identied as fur seal prey" = "#278B9AFF", 
-                                          "fish species never identied as fur seal prey" = "#B4DAE5FF")) +
-    ggplot2::scale_y_continuous(trans = "log10") +
-    ggplot2::ylab(paste0("Concentration (in mg/kg dry weight)")) +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 15), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, face = "bold"), 
-                   legend.position = "bottom",
-                   legend.title = ggplot2::element_blank(),
-                   legend.text = ggplot2::element_text(size = 15)
-    )
-  ggplot2::ggsave("output/compo fish/compo_prey_vs_not_prey_rel_trace_only.jpg",
-                  scale = 1,
-                  height = 8, width = 9
-  )
-  
-}
-
-
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# absolute concentrations of nutrients in fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-MWtest_compo_prey_not_prey_abs <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  compo_tib <- res_fish_tib |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    # make non-prey and prey species of fur seals distinct
-    dplyr::mutate(type = dplyr::case_when(diet == 1 ~ "prey",
-                                          diet == 0 ~ "not prey")) 
-  
-  nut_vec <- unique(compo_tib$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table <- compo_tib |>
-      dplyr::filter(Nutrient == nut) |>
-      tidyr::pivot_wider(names_from = type, 
-                         values_from = concentration_mg_kg_dw)
-    
-    prey <- na.omit(table$`prey`)
-    not_prey <- na.omit(table$`not prey`)
-    
-    nut_test <- data.frame(Nutrient = nut, 
-                           alpha_MW = wilcox.test(prey, not_prey)[[3]])
-    
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Nutrient = NA, 
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,]
-  
-  df_test <- df_test |>
-    dplyr::mutate(significant = dplyr::case_when(alpha_MW <= 0.05 ~ "yes", 
-                                                 TRUE ~ "no"))
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/compo fish/Mann_Whitney_test_fish_prey_not_prey_absolute.xlsx")
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# absolute concentrations of nutrients in fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-MWtest_compo_prey_not_prey_mean_sp_abs <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  compo_tib <- res_fish_tib |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    # make non-prey and prey species of fur seals distinct
-    dplyr::mutate(type = dplyr::case_when(diet == 1 ~ "prey",
-                                          diet == 0 ~ "not prey")) |>
-    dplyr::group_by(type, Species, Nutrient) |>
-    dplyr::summarise(mean_sp = mean(concentration_mg_kg_dw))
-  
-  nut_vec <- unique(compo_tib$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table <- compo_tib |>
-      dplyr::filter(Nutrient == nut) |>
-      tidyr::pivot_wider(names_from = type, 
-                         values_from = mean_sp)
-    
-    prey <- na.omit(table$`prey`)
-    not_prey <- na.omit(table$`not prey`)
-    
-    nut_test <- data.frame(Nutrient = nut, 
-                           alpha_MW = wilcox.test(prey, not_prey)[[3]])
-    
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Nutrient = NA, 
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,]
-  
-  df_test <- df_test |>
-    dplyr::mutate(significant = dplyr::case_when(alpha_MW <= 0.05 ~ "yes", 
-                                                 TRUE ~ "no"))
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/compo fish/Mann_Whitney_test_fish_prey_not_prey_absolute_mean_sp.xlsx")
-  
-}
-
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# relative concentrations of nutrients in fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-MWtest_compo_prey_not_prey_rel_trace_only <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  compo_tib <- res_fish_tib |>
-    dplyr::mutate(sum = As + Co + Cu + Fe + 
-                    Mn + Ni + Se + Zn) |>
-    tidyr::pivot_longer(cols = c(As, Co, Cu, Fe, Mn, Ni, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(relative_concentration = concentration_mg_kg_dw/sum) |>
-    # make non-prey and prey species of fur seals distinct
-    dplyr::mutate(type = dplyr::case_when(diet == 1 ~ "prey",
-                                          diet == 0 ~ "not prey")) 
-  
-  nut_vec <- unique(compo_tib$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table <- compo_tib |>
-      dplyr::filter(Nutrient == nut) |>
-      tidyr::pivot_wider(names_from = type, 
-                         values_from = relative_concentration)
-    
-    prey <- na.omit(table$`prey`)
-    not_prey <- na.omit(table$`not prey`)
-    
-    nut_test <- data.frame(Nutrient = nut, 
-                           alpha_MW = wilcox.test(prey, not_prey)[[3]])
-    
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Nutrient = NA, 
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,]
-  
-  df_test <- df_test |>
-    dplyr::mutate(significant = dplyr::case_when(alpha_MW <= 0.05 ~ "yes", 
-                                                 TRUE ~ "no"))
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/compo fish/Mann_Whitney_test_fish_prey_not_prey_rel_trace_only.xlsx")
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# relative concentrations of nutrients in fish species identified as prey of
-# A. gazella and fish never identified as prey of A. gazella around Kerguelen
-MWtest_compo_prey_not_prey_rel_all_nut <- function(res_fish_tib) {
-  options(scipen = 999)
-  
-  compo_tib <- res_fish_tib |>
-    dplyr::mutate(sum = As + Ca + Co + Cu + Fe + K +
-                    Mg + Mn + Na + Ni + P + Se + Zn) |>
-    tidyr::pivot_longer(cols = c(As, Ca, Co, Cu, Fe, K, Mg, Mn, Na, Ni, P, Se, Zn), 
-                        names_to = "Nutrient", 
-                        values_to = "concentration_mg_kg_dw") |>
-    dplyr::mutate(relative_concentration = concentration_mg_kg_dw/sum) |>
-    # make non-prey and prey species of fur seals distinct
-    dplyr::mutate(type = dplyr::case_when(diet == 1 ~ "prey",
-                                          diet == 0 ~ "not prey")) 
-  
-  nut_vec <- unique(compo_tib$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table <- compo_tib |>
-      dplyr::filter(Nutrient == nut) |>
-      tidyr::pivot_wider(names_from = type, 
-                         values_from = relative_concentration)
-    
-    prey <- na.omit(table$`prey`)
-    not_prey <- na.omit(table$`not prey`)
-    
-    nut_test <- data.frame(Nutrient = nut, 
-                           alpha_MW = wilcox.test(prey, not_prey)[[3]])
-    
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Nutrient = NA, 
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,]
-  
-  df_test <- df_test |>
-    dplyr::mutate(significant = dplyr::case_when(alpha_MW <= 0.05 ~ "yes", 
-                                                 TRUE ~ "no"))
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/compo fish/Mann_Whitney_test_fish_prey_not_prey_rel_all_nut.xlsx")
   
 }

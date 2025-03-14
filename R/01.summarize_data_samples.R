@@ -62,7 +62,7 @@ summary_samples <- function(sample_data,
                                                             "Macrourus carinatus") ~ "Bathydemersal" 
                                              )) |>
     dplyr::group_by(Family, Species, Habitat) |>
-    dplyr::mutate(SL_cm = as.integer(SL_cm)) |> # generates warnings because
+    dplyr::mutate(SL_cm = as.numeric(SL_cm)) |> # generates warnings because
     # of samples with approximate length (*XX) as they were damaged
     dplyr::summarize(n = dplyr::n_distinct(Code_new_format), 
                      length_mean = mean(SL_cm, na.rm = TRUE), 

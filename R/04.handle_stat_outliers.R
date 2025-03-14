@@ -68,10 +68,10 @@ replace_outliers_conc <- function(compo_tib) {
                   Zn = dplyr::case_when(Code_sample == "2005_GYMNFRA_GF11" ~ quant_zn,
                                         TRUE ~ Zn)) |>
     dplyr::select(Code_sample, Family, Species,
-                  Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, As, Co, 
-                  Ag, Pb)
+                  Ca, P, Na, K, Mg, 
+                  Fe, Zn, Cu, Mn,
+                  As, Se, Ni, Co, 
+                  Sr, Cd, Ag, Pb)
 }
 
 
@@ -85,10 +85,10 @@ set_up_tible_for_stat_analysis <- function(compo_tib_no_outliers) {
   
   compo_tib_no_outliers |>
     # compute mean per sp as stat. analysis will be computed on means per sp
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Ag, Pb), 
                         names_to = 'Nutrient', 
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::group_by(Family, Species, Nutrient) |>
@@ -144,6 +144,7 @@ set_up_tible_for_stat_analysis <- function(compo_tib_no_outliers) {
                                                                         "Gymnoscopelus bolini", 
                                                                         "Gymnoscopelus braueri", 
                                                                         "Gymnoscopelus fraseri",
+                                                                        "Gymnoscopelus nicholsi",
                                                                         "Gymnoscopelus piabilis",
                                                                         "Krefftichthys anderssoni",
                                                                         "Protomyctophum andriashevi",
@@ -153,11 +154,12 @@ set_up_tible_for_stat_analysis <- function(compo_tib_no_outliers) {
                                                                         "Dissostichus eleginoides",
                                                                         "Gobionotothen acuta",
                                                                         "Lepidonotothen squamifrons",
+                                                                        "Lindbergichthys mizops",
                                                                         "Melanostigma gelatinosum") ~ "yes",
                                                          TRUE ~ "no")) |>
     dplyr::select(Habitat, Family, Species, n, confirmed_forage_sp,
-                  Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, As, Co, 
-                  Ag, Pb)
+                  Ca, P, Na, K, Mg, 
+                  Fe, Zn, Cu, Mn,
+                  As, Se, Ni, Co, 
+                  Sr, Cd, Ag, Pb)
 }

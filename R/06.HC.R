@@ -303,7 +303,7 @@ clust_compo_PCs_dendro <- function(res_pca,
                   Family = compo_tib_full$Family[tree$order], 
                   Habitat = compo_tib_full$Habitat[tree$order], 
                   Cluster = factor(clust_output$cluster[tree$order]), 
-                  diet_agazella = compo_tib_full$confirmed_forage_sp[tree$order]) |>
+                  diet = compo_tib_full$confirmed_forage_sp[tree$order]) |>
     dplyr::mutate(label = stringr::str_replace(label, "\n", " "), 
                   Family = factor(Family, 
                                   levels = c("Zoarcidae",
@@ -437,7 +437,7 @@ clust_compo_PCs_dendro <- function(res_pca,
       ggplot2::geom_text(data = dendro.labels, 
                          ggplot2::aes(x, y, 
                                       label = label, 
-                                      colour = diet_agazella),
+                                      colour = diet),
                          hjust = 1, size = 4) +
       ggplot2::scale_color_manual(values = c("#1D2645FF",
                                              "#278B9AFF")) +
@@ -489,9 +489,9 @@ boxplot_compo_clust <- function(clust_output,
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::mutate(Nutrient = factor(Nutrient, 
                                     levels = c("Ca", "P", "Na", "K", "Mg", 
-                                               "Fe", "Zn", "Cu", "Mn", "Se",
-                                               "As", "Ni", "Co", 
-                                               "Sr", "Cd", "Ag", "Pb"))) |>
+                                               "Fe", "Zn", "Cu", "Mn", 
+                                               "As", "Se", "Ni", "Co", 
+                                               "Sr", "Cd", "Pb", "Ag"))) |>
     dplyr::group_by(Nutrient) |>
     dplyr::summarise(mean = mean(concentration_mg_kg_dw), 
                      median = median(concentration_mg_kg_dw))
@@ -505,9 +505,9 @@ boxplot_compo_clust <- function(clust_output,
                         values_to = "concentration_mg_kg_dw") |>
     dplyr::mutate(Nutrient = factor(Nutrient, 
                                     levels = c("Ca", "P", "Na", "K", "Mg", 
-                                               "Fe", "Zn", "Cu", "Mn", "Se",
-                                               "As", "Ni", "Co", 
-                                               "Sr", "Cd", "Ag", "Pb"))) |>
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Se", "Ni", "Co", 
+                                               "Sr", "Cd", "Pb", "Ag"))) |>
     ggplot2::ggplot(ggplot2::aes(x = cluster, 
                                  y = concentration_mg_kg_dw, 
                                  fill = cluster)) +
@@ -559,11 +559,24 @@ boxplot_compo_clust <- function(clust_output,
     tidyr::pivot_longer(cols = c("Ca":"Pb"), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
-    dplyr::filter(!(Nutrient %in% c("Sr", "Cd", "Ag", "Pb"))) |>
+    dplyr::filter(!(Nutrient %in% c("Sr", "Cd", "Pb", "Ag"))) |>
     dplyr::mutate(Nutrient = factor(Nutrient, 
                                     levels = c("Ca", "P", "Na", "K", "Mg", 
-                                               "Fe", "Zn", "Cu", "Mn", "Se",
-                                               "As", "Ni", "Co"))) |>
+                                               "Fe", "Zn", "Cu", "Mn",
+                                               "As", "Se", "Ni", "Co")), 
+                  y_lim = dplyr::case_when(Nutrient == "Ca" ~ 40000,
+                                           Nutrient == "P" ~ 28000,
+                                           Nutrient == "Na" ~ 26000,
+                                           Nutrient == "K" ~ 19000,
+                                           Nutrient == "Mg" ~ 4800,
+                                           Nutrient == "Fe" ~ 240, 
+                                           Nutrient == "Zn" ~ 120, 
+                                           Nutrient == "Cu" ~ 14.5, 
+                                           Nutrient == "Mn" ~ 13,
+                                           Nutrient == "As" ~ 21, 
+                                           Nutrient == "Se" ~ 4.5,
+                                           Nutrient == "Ni" ~ 4.7, 
+                                           Nutrient == "Co" ~ 0.24)) |>
     ggplot2::ggplot(ggplot2::aes(x = cluster, 
                                  y = concentration_mg_kg_dw, 
                                  fill = cluster)) +
@@ -571,15 +584,16 @@ boxplot_compo_clust <- function(clust_output,
                          width = 1.4, alpha = 0.5) +
     ggplot2::geom_boxplot() +
     ggplot2::geom_hline(data = mean_median_tib |>
-                          dplyr::filter(!(Nutrient %in% c("Sr", "Cd", "Ag", "Pb"))), 
+                          dplyr::filter(!(Nutrient %in% c("Sr", "Cd", "Pb", "Ag"))), 
                         ggplot2::aes(yintercept = median), 
                         linetype = "solid", 
                         color = "darkred") +
     ggplot2::geom_hline(data = mean_median_tib |>
-                          dplyr::filter(!(Nutrient %in% c("Sr", "Cd", "Ag", "Pb"))), 
+                          dplyr::filter(!(Nutrient %in% c("Sr", "Cd", "Pb", "Ag"))), 
                         ggplot2::aes(yintercept = mean), 
                         linetype = "dashed", 
                         color = "darkred") +
+    ggplot2::geom_blank(ggplot2::aes(y = y_lim)) +
     ggplot2::ylab("Nutrient concentration (in mg/kg dry weight)") +
     ggplot2::scale_fill_manual(values = colour_palette) +
     ggplot2::scale_color_manual(values = colour_palette) +
@@ -611,9 +625,13 @@ boxplot_compo_clust <- function(clust_output,
     tidyr::pivot_longer(cols = c("Ca":"Pb"), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_kg_dw") |>
-    dplyr::filter(Nutrient %in% c("Sr", "Cd", "Ag", "Pb")) |>
+    dplyr::filter(Nutrient %in% c("Sr", "Cd", "Pb", "Ag")) |>
     dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Sr", "Cd", "Ag", "Pb"))) |>
+                                    levels = c("Sr", "Cd", "Pb", "Ag")), 
+                  y_lim = dplyr::case_when(Nutrient == "Sr" ~ 250, 
+                                           Nutrient == "Cd" ~ 2.1,
+                                           Nutrient == "Pb" ~ 1.6, 
+                                           Nutrient == "Ag" ~ 0.31)) |>
     ggplot2::ggplot(ggplot2::aes(x = cluster, 
                                  y = concentration_mg_kg_dw, 
                                  fill = cluster)) +
@@ -621,15 +639,16 @@ boxplot_compo_clust <- function(clust_output,
                          width = 1.4, alpha = 0.5) +
     ggplot2::geom_boxplot() +
     ggplot2::geom_hline(data = mean_median_tib |>
-                          dplyr::filter(Nutrient %in% c("Sr", "Cd", "Ag", "Pb")), 
+                          dplyr::filter(Nutrient %in% c("Sr", "Cd", "Pb", "Ag")), 
                         ggplot2::aes(yintercept = median), 
                         linetype = "solid", 
                         color = "darkred") +
     ggplot2::geom_hline(data = mean_median_tib |>
-                          dplyr::filter(Nutrient %in% c("Sr", "Cd", "Ag", "Pb")), 
+                          dplyr::filter(Nutrient %in% c("Sr", "Cd", "Pb", "Ag")), 
                         ggplot2::aes(yintercept = mean), 
                         linetype = "dashed", 
                         color = "darkred") +
+    ggplot2::geom_blank(ggplot2::aes(y = y_lim)) +
     ggplot2::ylab("Nutrient concentration\n(in mg/kg dry weight)") +
     ggplot2::scale_fill_manual(values = colour_palette) +
     ggplot2::scale_color_manual(values = colour_palette) +
@@ -683,9 +702,9 @@ stats_compo_clust <- function(clust_output,
                                            values_to = "concentration_mg_kg_dw") |>
                        dplyr::mutate(Nutrient = factor(Nutrient, 
                                                        levels = c("Ca", "P", "Na", "K", "Mg", 
-                                                                  "Fe", "Zn", "Cu", "Mn", "Se",
-                                                                  "As", "Ni", "Co", 
-                                                                  "Sr", "Cd", "Ag", "Pb"))) |>
+                                                                  "Fe", "Zn", "Cu", "Mn",
+                                                                  "As", "Se", "Ni", "Co", 
+                                                                  "Sr", "Cd", "Pb", "Ag"))) |>
                        dplyr::group_by(cluster, Nutrient) |>
                        dplyr::summarise(mean = round(mean(concentration_mg_kg_dw), 3),
                                         median = round(median(concentration_mg_kg_dw), 3),
@@ -702,9 +721,9 @@ stats_compo_clust <- function(clust_output,
                                            values_to = "concentration_mg_kg_dw") |>
                        dplyr::mutate(Nutrient = factor(Nutrient, 
                                                        levels = c("Ca", "P", "Na", "K", "Mg", 
-                                                                  "Fe", "Zn", "Cu", "Mn", "Se",
-                                                                  "As", "Ni", "Co", 
-                                                                  "Sr", "Cd", "Ag", "Pb"))) |>
+                                                                  "Fe", "Zn", "Cu", "Mn",
+                                                                  "As", "Se", "Ni", "Co", 
+                                                                  "Sr", "Cd", "Pb", "Ag"))) |>
                        dplyr::group_by(cluster, Nutrient) |>
                        dplyr::summarise(mean = round(mean(concentration_mg_kg_dw), 3),
                                         median = round(median(concentration_mg_kg_dw), 3),
@@ -769,14 +788,12 @@ MWtest_clust_k4 <- function(clust_output,
   compo_tib <- compo_tib |>
     tidyr::pivot_longer(cols = c(Ca:Pb), 
                         names_to = "Nutrient", 
-                        values_to = "mean_sp_conc_mg_kg_dw") |>
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", 
-                                               "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se", "Co",
-                                               "Sr", "Cd", "Ag", "Pb")))
+                        values_to = "mean_sp_conc_mg_kg_dw")
   
-  nut_vec <- unique(compo_tib$Nutrient)
+  nut_vec <- c("Ca", "P", "Na", "K", "Mg", 
+               "Fe", "Zn", "Cu", "Mn",
+               "As", "Se", "Ni", "Co",
+               "Sr", "Cd", "Pb", "Ag")
   
   list_outputs <- list()
   

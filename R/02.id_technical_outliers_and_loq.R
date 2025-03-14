@@ -36,10 +36,10 @@ boxplot_id_outliers_stats <- function(fish_compo_tib) {
                   Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
                                         # loq is 0.01 for all samples 
                                         TRUE ~ Pb)) |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Ag, Pb), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_g_dw") |>
     dplyr::mutate(Genus = stringr::str_split_fixed(Species, " ", 2)[,1], 
@@ -48,10 +48,10 @@ boxplot_id_outliers_stats <- function(fish_compo_tib) {
     dplyr::mutate(outlier = ifelse(find_outlier(concentration_mg_g_dw), 
                                    Code_sample, NA), 
                   Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
                                                "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb"))) |>
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Ag", "Cd", "Pb"))) |>
     ggplot2::ggplot(ggplot2::aes(x = Nutrient, y = concentration_mg_g_dw, 
                                  fill = Nutrient)) +
     ggplot2::geom_text(ggplot2::aes(label = outlier), na.rm=TRUE, 
@@ -95,19 +95,19 @@ hist_id_outliers <- function(fish_compo_tib
                   Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
                                         # loq is 0.01 for all samples 
                                         TRUE ~ Pb)) |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Ag, Pb), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_g_dw") |>
     dplyr::mutate(Genus = stringr::str_split_fixed(Species, " ", 2)[,1], 
                   sp = stringr::str_split_fixed(Species, " ", 2)[,2], 
                   Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
                                                "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb"))) |>
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Ag", "Cd", "Pb"))) |>
     dplyr::group_by(Nutrient) |>
     ggplot2::ggplot(ggplot2::aes(x = concentration_mg_g_dw, fill = Nutrient)) +
     ggplot2::geom_histogram() +
@@ -158,20 +158,20 @@ tib_id_outliers <- function(fish_compo_tib, # tibble with results of compo of pr
                   Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
                                         # loq is 0.01 for all samples 
                                         TRUE ~ Pb)) |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Ag, Pb), 
                         names_to = "Nutrient", 
                         values_to = "concentration_mg_g_dw") |>
     dplyr::mutate(Code_sample = 
                     dplyr::case_when(Code_sample == "2005_GYMNBOL_GB6AB" ~ "2005_GYMNBOL_GB6", # name not adapted when gone to analysis
                                      TRUE ~ Code_sample), 
                   Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Na", "K", "Mg", "Sr",
+                                    levels = c("Ca", "P", "Na", "K", "Mg", 
                                                "Fe", "Zn", "Cu", "Mn",
-                                               "As", "Ni", "Se",
-                                               "Cd", "Co", "Ag", "Pb"))) |>
+                                               "As", "Se", "Ni", "Co",
+                                               "Sr", "Ag", "Cd", "Pb"))) |>
     dplyr::group_by(Nutrient) |>
     dplyr::mutate(outlier = ifelse(find_outlier(concentration_mg_g_dw), 
                                    Code_sample, NA), 
@@ -267,10 +267,10 @@ ID_under_loq_values <- function(fish_compo_tib
     dplyr::mutate(Pb = as.numeric(Pb), 
                   Sr = as.numeric(Sr), 
                   Ag = as.numeric(Ag)) |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Ag, Pb), 
                         names_to = 'Nutrient', 
                         values_to = "conc_mg_kg_dw") |>
     dplyr::group_by(Species, Nutrient) |>
@@ -336,10 +336,10 @@ table_compo_fish_sp_without_loq_replaced <- function(fish_compo_tib) {
     dplyr::mutate(Pb = as.numeric(Pb), 
                   Sr = as.numeric(Sr), 
                   Ag = as.numeric(Ag)) |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Ag, Pb), 
                         names_to = 'Nutrient', 
                         values_to = "concentration_mg_kg_dw") |>
     ## remove NAs if there is still some
@@ -388,10 +388,10 @@ table_compo_fish_sp_with_loq_replaced <- function(fish_compo_tib) {
                   Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
                                         # loq is 0.01 for all samples 
                                         TRUE ~ Pb)) |>
-    tidyr::pivot_longer(cols = c(Ag, Pb, Cd, Sr,
-                                 Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Cu, Mn, Se,
-                                 As, Ni, Co), 
+    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+                                 Fe, Zn, Cu, Mn,
+                                 As, Se, Ni, Co, 
+                                 Sr, Cd, Ag, Pb), 
                         names_to = 'Nutrient', 
                         values_to = "concentration_mg_kg_dw") |>
     ## remove NAs if there is still some

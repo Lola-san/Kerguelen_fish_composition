@@ -39,4 +39,7 @@ renv::install("ggtext")
 # checking for updates
 renv::status()
 
-
+## when running renv::restore() to keep old packages version (I updated R)
+# I had a problem wit the installation of "lattice"
+renv::install("pkgbuild")
+pkgbuild::find_rtools(debug = TRUE)

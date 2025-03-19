@@ -77,7 +77,7 @@ clust_find_k_table_PCs <- function(res_pca,
   
   # create file
   openxlsx::write.xlsx(df.to.plot, 
-                       file = paste0("output/05.HC/find_k_validity_measures_", 
+                       file = paste0("output/04.HC/find_k_validity_measures_", 
                                      file_name,
                                      ".xlsx"))
   
@@ -132,7 +132,7 @@ boxplot_clust_find_k_val <- function(find_k_output,
   
   
   # save plot 
-  ggplot2::ggsave(paste0("output/05.HC/", 
+  ggplot2::ggsave(paste0("output/04.HC/", 
                          file_name,
                          ".jpg"),
                   scale = 1,
@@ -186,7 +186,7 @@ means_clust_find_k_val <- function(find_k_output,
                    legend.position = "none")
   
   # save plot 
-  ggplot2::ggsave(paste0("output/05.HC/validity_measures_means_",
+  ggplot2::ggsave(paste0("output/04.HC/validity_measures_means_",
                          file_name,
                          ".jpg"),
                   scale = 1,
@@ -204,7 +204,7 @@ means_clust_find_k_val <- function(find_k_output,
 # with hclust algorithm
 clust_compo_PCs <- function(res_pca, 
                             k, 
-                            file_name, # of the table with validity measures
+                            file_name, 
                             method = "ward.D2"
 ) {
   
@@ -237,7 +237,7 @@ clust_compo_PCs <- function(res_pca,
                           min.clust.size = clust_stats$min.cluster.size) 
   
   openxlsx::write.xlsx(clust.val, 
-                       file = paste0("output/05.HC/clust_PCs_validity_measures_", 
+                       file = paste0("output/04.HC/clust_PCs_validity_measures_", 
                                      file_name, 
                                      ".xlsx"))
   
@@ -359,7 +359,7 @@ clust_compo_PCs_dendro <- function(res_pca,
       ggplot2::theme_classic() 
     
     # save plot 
-    ggplot2::ggsave(paste0("output/05.HC/dendrogram_", 
+    ggplot2::ggsave(paste0("output/04.HC/dendrogram_", 
                            file_name, "_",
                            colour, ".jpg"),
                     scale = 1,
@@ -386,7 +386,7 @@ clust_compo_PCs_dendro <- function(res_pca,
       ggplot2::theme_classic()
     
     # save plot 
-    ggplot2::ggsave(paste0("output/05.HC/dendrogram_", 
+    ggplot2::ggsave(paste0("output/04.HC/dendrogram_", 
                            file_name, "_",
                            colour, ".jpg"),
                     scale = 1,
@@ -430,7 +430,7 @@ clust_compo_PCs_dendro <- function(res_pca,
                      legend.key.height = ggplot2::unit(1, "cm"))
     
     # save plot 
-    ggplot2::ggsave(paste0("output/05.HC/dendrogram_", 
+    ggplot2::ggsave(paste0("output/04.HC/dendrogram_", 
                            file_name, "_",
                            colour, "_k", k, ".jpg"),
                     scale = 1,
@@ -456,7 +456,7 @@ clust_compo_PCs_dendro <- function(res_pca,
       ggplot2::theme(legend.key.height = ggplot2::unit(1.5, "cm"))
     
     # save plot 
-    ggplot2::ggsave(paste0("output/05.HC/dendrogram_", 
+    ggplot2::ggsave(paste0("output/04.HC/dendrogram_", 
                            file_name, "_",
                            colour, ".jpg"),
                     scale = 1,
@@ -547,17 +547,12 @@ boxplot_compo_clust <- function(clust_output,
                    legend.position = "none")
   
   # save plot 
-  ggplot2::ggsave(paste0("output/05.HC/clust_boxplot_",
+  ggplot2::ggsave(paste0("output/04.HC/clust_boxplot_",
                          file_name,
                          ".jpg"),
                   scale = 1,
                   height = 8, width = 10)
-  ggplot2::ggsave(paste0("output/05.HC/clust_boxplot_",
-                         file_name,
-                         ".svg"),
-                  scale = 1,
-                  height = 8, width = 10)
-  
+
   
   # only essentials 
   compo_tib_means_sp |> 
@@ -619,9 +614,14 @@ boxplot_compo_clust <- function(clust_output,
                    legend.position = "none")
   
   # save plot 
-  ggplot2::ggsave(paste0("output/05.HC/clust_boxplot_",
+  ggplot2::ggsave(paste0("output/04.HC/clust_boxplot_",
                          file_name,
                          "_essentials_only.jpg"),
+                  scale = 1,
+                  height = 8, width = 10)
+  ggplot2::ggsave(paste0("output/04.HC/clust_boxplot_",
+                         file_name,
+                         "_essentials_only.svg"),
                   scale = 1,
                   height = 8, width = 10)
   
@@ -674,14 +674,24 @@ boxplot_compo_clust <- function(clust_output,
                    legend.position = "none")
   
   # save plot 
-  ggplot2::ggsave(paste0("output/05.HC/clust_boxplot_",
+  ggplot2::ggsave(paste0("output/04.HC/clust_boxplot_",
                          file_name,
                          "_non-essentials_only_legend.jpg"),
                   scale = 1,
                   height = 2.5, width = 8)
-  ggplot2::ggsave(paste0("output/05.HC/clust_boxplot_",
+  ggplot2::ggsave(paste0("output/04.HC/clust_boxplot_",
                          file_name,
                          "_non-essentials_only.jpg"),
+                  scale = 1,
+                  height = 2, width = 9)
+  ggplot2::ggsave(paste0("output/04.HC/clust_boxplot_",
+                         file_name,
+                         "_non-essentials_only_legend.svg"),
+                  scale = 1,
+                  height = 2.5, width = 8)
+  ggplot2::ggsave(paste0("output/04.HC/clust_boxplot_",
+                         file_name,
+                         "_non-essentials_only.svg"),
                   scale = 1,
                   height = 2, width = 9)
   
@@ -744,7 +754,7 @@ stats_compo_clust <- function(clust_output,
   
   # save 
   openxlsx::write.xlsx(stats_tib, 
-                       file = paste0("output/05.HC/stats_compo_clust_", 
+                       file = paste0("output/04.HC/stats_compo_clust_", 
                                      file_name, ".xlsx"))
   
   stats_tib
@@ -770,7 +780,7 @@ clust_sp_attrib <- function(clust_output,
   
   # save 
   openxlsx::write.xlsx(clust_tib, 
-                       file = paste0("output/05.HC/clust_attribution_", 
+                       file = paste0("output/04.HC/clust_attribution_", 
                                      file_name, ".xlsx"))
 }
 
@@ -857,7 +867,7 @@ MWtest_clust_k4 <- function(clust_output,
                                                  TRUE ~ "no"))
 
   openxlsx::write.xlsx(df_test, 
-                       file = paste0("output/05.HC/MWW_test_clust_", 
+                       file = paste0("output/04.HC/MWW_test_clust_", 
                                      file_name, ".xlsx"))
   
   
@@ -1053,7 +1063,7 @@ biplot_after_clust <- function(res_pca,
   g
 
   # save plot 
-  ggplot2::ggsave(paste0("output/05.HC/clust_biplot_",
+  ggplot2::ggsave(paste0("output/04.HC/clust_biplot_",
                          file_name,
                          ".jpg"),
                   scale = 1,

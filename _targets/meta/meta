@@ -2,19 +2,19 @@ name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iterat
 add_eco_habitat_sp|function|e700e68f7d62d369|||||||||||||||
 barplot_clust|function|5d2a574c7b353114|||||||||||||||
 barplot_comp_nut_prey_not_prey|function|32b38148ef3d86f2|||||||||||||||
-barplot_compo_CV|stem|169a17b8b9f28a0b|c068782d75be4e91|3c27170183d30417|-1946174804||t20161.5698461116s|9ad0b176bfc1180e|100|rds|local|vector|||0.24||
-barplot_compo_relative|stem|ec49e8cf285eba0a|e05cbd9638baeb48|d00a7e1c2900cd0a|163725715||t20161.5698407552s|1e38ab1d9f551fe5|127|rds|local|vector|||4.19||
-barplot_nut_CV|function|cd1ec6075aa10d7b|||||||||||||||
-barplot_nut_fish_compo_relative|function|b065aea0da17ee21|||||||||||||||
-biplot_after_clust|function|e41ecc7877e7510a|||||||||||||||
-biplot_pca_coda|function|ba88656976b4fb52|||||||||||||||
-biplot_pca_essentials|stem|49b6eed65d00add4|88acec2efc50d13f|e0ec0147de6093b2|-2044128447||t20161.5698621002s|36d9ea1c8315d78b|96|rds|local|vector|||0.37||
+barplot_compo_CV|stem|db3cf142b1733d4e|c068782d75be4e91|edf3ce8bff7b1d99|-1946174804||t20166.4622370895s|9ad0b176bfc1180e|100|rds|local|vector|||0.67||
+barplot_compo_relative|stem|11e318caab3fb6f3|e05cbd9638baeb48|a758545e8ef71f27|163725715||t20166.4650120687s|9769db91a3220414|126|rds|local|vector|||3.33||
+barplot_nut_CV|function|b34a676a56675314|||||||||||||||
+barplot_nut_fish_compo_relative|function|33e16f10ef4df9a0|||||||||||||||
+biplot_after_clust|function|65f2ffad11f27def|||||||||||||||
+biplot_pca_coda|function|5fe25e611f67ad27|||||||||||||||
+biplot_pca_essentials|stem|81e4ae7729cdb5e3|4b1abf6bb22c6bd1|ce48f7e77e5c2be4|-2044128447||t20166.5187813139s|87acf94f6e8bd357|91|rds|local|vector|||1.24||
 biplot_pca_nocoda|function|8a90c70d07bf5662|||||||||||||||
 biplot_pca_with_non_essentials|stem|7d92608fd2d8d327|62836cbecc0e53f2|b375154529a7dddf|1099620812||t20161.5698726359s|e441caf5cebd5545|94|rds|local|vector|||0.4||
-boxplot_clust_find_k_val|function|47dfcb84e4b47cc3|||||||||||||||
+boxplot_clust_find_k_val|function|52dbbeb60315a6e7|||||||||||||||
 boxplot_compare_compo_prey_not_prey_abs|function|bef6a2ec715fbd98|||||||||||||||
 boxplot_compare_compo_prey_not_prey_rel|function|904922439680f84c|||||||||||||||
-boxplot_compo_clust|function|7de2d16fa39dd867|||||||||||||||
+boxplot_compo_clust|function|b2494dab14723bfe|||||||||||||||
 boxplot_compo_fish_camp|function|82d3d45ea80fb897|||||||||||||||
 boxplot_compo_fish_camp_full|function|ae81acf64477af6f|||||||||||||||
 boxplot_compo_fish_fam|function|e47881c9d319bcec|||||||||||||||
@@ -30,68 +30,68 @@ boxplot_compo_fish_sp_one_nut_grad|function|111a56a26a4cd3c0|||||||||||||||
 boxplot_compo_fish_sp_one_nut_grad_sp|function|5e91d3752bcd1682|||||||||||||||
 boxplot_compo_fish_sp_one_nut_legend|function|e7cfa3b3d86ca56a|||||||||||||||
 boxplot_compo_fish_tot|function|a9e9e04b2d5c2684|||||||||||||||
-boxplot_compo_per_sp_all_nut|stem|250eeef5a82e564c|ce143b3f6fa5d6a6|d66b0f4d610a50c5|969017282||t20161.5696717097s|8781e7d3a4a21eb4|105|rds|local|vector|||18.48|Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purp|
-boxplot_compo_sp_all_nut|function|5563fce3cdafb458|||||||||||||||
-boxplot_fish_sp_nut_grad_Ag|stem|07e003f862b7640e|39371d662c875eb3|578fb1e2fe2d01a9|1802136729||t20161.569441659s|813d84234e908062|109|rds|local|vector|||0.44||
-boxplot_fish_sp_nut_grad_As|stem|fa8ebc17efbd00bd|4a8408482b2c71da|578fb1e2fe2d01a9|-145434096||t20161.5694525343s|813d84234e908062|109|rds|local|vector|||0.46||
-boxplot_fish_sp_nut_grad_Ca|stem|e55f5d556ebfad88|b6912c049e9d7645|578fb1e2fe2d01a9|1322414032||t20161.5693558685s|813d84234e908062|109|rds|local|vector|||0.44||
-boxplot_fish_sp_nut_grad_Cd|stem|8b0e42f2051878c7|1f49b22ab6155a32|578fb1e2fe2d01a9|-2136571799||t20161.5693608114s|813d84234e908062|109|rds|local|vector|||0.41||
-boxplot_fish_sp_nut_grad_Co|stem|0698102e15a08f71|76d3d45551b4fdde|578fb1e2fe2d01a9|-1868575012||t20161.5693798656s|813d84234e908062|109|rds|local|vector|||0.42||
-boxplot_fish_sp_nut_grad_Cu|stem|c086f8b19b28ca95|ec7992298c3a2ab2|578fb1e2fe2d01a9|2007695084||t20161.5693911519s|813d84234e908062|109|rds|local|vector|||0.4||
-boxplot_fish_sp_nut_grad_Fe|stem|fb2158b572dc6d49|7b3ae300eaef271e|578fb1e2fe2d01a9|1900752520||t20161.5696786038s|813d84234e908062|109|rds|local|vector|||0.6||
-boxplot_fish_sp_nut_grad_K|stem|392532fa8024a99a|0a0c7eaad479d95c|578fb1e2fe2d01a9|2013983981||t20161.5694012118s|809d88ef48c68ced|108|rds|local|vector|||0.42||
-boxplot_fish_sp_nut_grad_legend|stem|1b2a17584330041b|3f36ab8a53634b1d|f5d3fc213f353792|-1741635265||t20161.5694202585s|b7d4d37884c593be|120|rds|local|vector|||1.63||
-boxplot_fish_sp_nut_grad_Mg|stem|fa5336bacc81905a|857d0f9ecbedca3b|578fb1e2fe2d01a9|-780607570||t20161.5693748069s|813d84234e908062|109|rds|local|vector|||0.47||
-boxplot_fish_sp_nut_grad_Mn|stem|d7f9ca4ef90896ba|fadd68f39a602314|578fb1e2fe2d01a9|-1385189595||t20161.5693962277s|813d84234e908062|109|rds|local|vector|||0.42||
-boxplot_fish_sp_nut_grad_Na|stem|aa2d2bf0266079d2|d4f0175c274b6839|578fb1e2fe2d01a9|1056601668||t20161.5694303856s|813d84234e908062|109|rds|local|vector|||0.43||
-boxplot_fish_sp_nut_grad_Ni|stem|bd5a2e73d266ac12|5cd601aadd0a1f58|578fb1e2fe2d01a9|-410600168||t20161.5694472998s|813d84234e908062|109|rds|local|vector|||0.48||
-boxplot_fish_sp_nut_grad_P|stem|738c55e8fb869138|d1fa4afcc45e61a2|578fb1e2fe2d01a9|1111531337||t20161.5693506823s|809d88ef48c68ced|108|rds|local|vector|||1.93||
-boxplot_fish_sp_nut_grad_Pb|stem|7389b45f514c52b6|7067eb7a0e12baf5|578fb1e2fe2d01a9|-959628756||t20161.5694250783s|813d84234e908062|109|rds|local|vector|||0.41||
-boxplot_fish_sp_nut_grad_Se|stem|14f694ecd8fc2843|b39fdbe1dec32336|578fb1e2fe2d01a9|-473918126||t20161.5693862338s|813d84234e908062|109|rds|local|vector|||0.53||
-boxplot_fish_sp_nut_grad_Sr|stem|0b9956121d9af86b|3b0370b338249cbe|578fb1e2fe2d01a9|1284948524||t20161.5694357132s|813d84234e908062|109|rds|local|vector|||0.45||
-boxplot_fish_sp_nut_grad_Zn|stem|41963cc2a43c3972|3984bbfb56bbfa95|578fb1e2fe2d01a9|-626290679||t20161.5694577027s|813d84234e908062|109|rds|local|vector|||0.43||
+boxplot_compo_per_sp_all_nut|stem|9ae35755d8e95c77|018908497a8da895|e695a5d593b83be0|969017282||t20166.4720473628s|809d88ef48c68ced|108|rds|local|vector|||18.4|Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purposes.. Groups with fewer than two datapoints have been dropped.ℹ Set drop  FALSE to consider such groups for position adjustment purp|
+boxplot_compo_sp_all_nut|function|1966d5387f6baa3f|||||||||||||||
+boxplot_fish_sp_nut_grad_Ag|stem|324cc8de850b7aca|d8170823cd281700|d26e9dda832d675d|1802136729||t20166.4718038921s|530f140998b50d1c|112|rds|local|vector|||0.52||
+boxplot_fish_sp_nut_grad_As|stem|4cfd45b5ffd41a7c|a7495ea459792448|d26e9dda832d675d|-145434096||t20166.4717922336s|530f140998b50d1c|112|rds|local|vector|||0.53||
+boxplot_fish_sp_nut_grad_Ca|stem|3e9c7ce995926014|da44254df750b783|d26e9dda832d675d|1322414032||t20166.4718158618s|530f140998b50d1c|112|rds|local|vector|||0.54||
+boxplot_fish_sp_nut_grad_Cd|stem|8f3f6689fb4be6d6|a09fe6514dbec29f|d26e9dda832d675d|-2136571799||t20166.4718219189s|530f140998b50d1c|112|rds|local|vector|||0.5||
+boxplot_fish_sp_nut_grad_Co|stem|a96e87d2518f158a|2f2abcc9b7db95df|d26e9dda832d675d|-1868575012||t20166.4720660722s|530f140998b50d1c|112|rds|local|vector|||0.56||
+boxplot_fish_sp_nut_grad_Cu|stem|0273016854ed787e|dd5093f527999cdd|d26e9dda832d675d|2007695084||t20166.4717450968s|530f140998b50d1c|112|rds|local|vector|||1.11||
+boxplot_fish_sp_nut_grad_Fe|stem|bf2f6803523dc933|c875145dcc75772b|d26e9dda832d675d|1900752520||t20166.4717610286s|530f140998b50d1c|112|rds|local|vector|||0.43||
+boxplot_fish_sp_nut_grad_K|stem|1007d30b00178444|0f3439ebc9373165|d26e9dda832d675d|2013983981||t20166.4718281775s|9b43f3e0f172ee04|111|rds|local|vector|||0.53||
+boxplot_fish_sp_nut_grad_legend|stem|20469f45a608c0cb|6509e26423c3da2e|459dcb624cee5cc1|-1741635265||t20166.4717859341s|9598b4a3de987810|122|rds|local|vector|||1.23||
+boxplot_fish_sp_nut_grad_Mg|stem|965e2bf561ff0e30|4c03fa3cb1c32481|d26e9dda832d675d|-780607570||t20166.4718344628s|530f140998b50d1c|112|rds|local|vector|||0.53||
+boxplot_fish_sp_nut_grad_Mn|stem|2077f5a4790c74a3|6ca2e27c021e0f1f|d26e9dda832d675d|-1385189595||t20166.4720593099s|530f140998b50d1c|112|rds|local|vector|||0.55||
+boxplot_fish_sp_nut_grad_Na|stem|1951bc0427874921|499e566d46970ce5|d26e9dda832d675d|1056601668||t20166.4717977006s|530f140998b50d1c|112|rds|local|vector|||0.47||
+boxplot_fish_sp_nut_grad_Ni|stem|f08e091512cf32db|dba0da07bbc54053|d26e9dda832d675d|-410600168||t20166.4718097625s|530f140998b50d1c|112|rds|local|vector|||0.5||
+boxplot_fish_sp_nut_grad_P|stem|0fb8343b9f06c381|db51c578be98b68c|d26e9dda832d675d|1111531337||t20166.4717663253s|9b43f3e0f172ee04|111|rds|local|vector|||0.45||
+boxplot_fish_sp_nut_grad_Pb|stem|172fc92534924df2|94a86b31d248d54a|d26e9dda832d675d|-959628756||t20166.4717715827s|530f140998b50d1c|112|rds|local|vector|||0.44||
+boxplot_fish_sp_nut_grad_Se|stem|b7cdf85436fef2ea|0174b64a3afbf74f|d26e9dda832d675d|-473918126||t20166.4720529668s|530f140998b50d1c|112|rds|local|vector|||0.47||
+boxplot_fish_sp_nut_grad_Sr|stem|57f9501ae54c8fec|8ab78943ca6321f6|d26e9dda832d675d|1284948524||t20166.4717502369s|530f140998b50d1c|112|rds|local|vector|||0.43||
+boxplot_fish_sp_nut_grad_Zn|stem|f13c7c61f2e89dc8|9c251f0b779bd69d|d26e9dda832d675d|-626290679||t20166.4717560346s|530f140998b50d1c|112|rds|local|vector|||0.5||
 boxplot_id_outliers|stem|cbc49047941d8da9|e5ad2f3e555303cc|0212aa9546001c34|744740513||t19867.4041898549s|097df6ed47d18f96|107|rds|local|vector|||2.41|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 boxplot_id_outliers_stats|function|d8bb765552896a11|||||||||||||||
-clust_compo_PCs|function|e26b1a3fde1621a0|||||||||||||||
-clust_compo_PCs_dendro|function|b863d46a3134f7c8|||||||||||||||
+clust_compo_PCs|function|fbe4af17ec78ac10|||||||||||||||
+clust_compo_PCs_dendro|function|5196da26cd73b8d5|||||||||||||||
 clust_compo_PCs_dendro_both|function|17810932f5d0512c|||||||||||||||
 clust_compo_PCs_dendro_both_nut|function|6e6f4cfb0cd09bc3|||||||||||||||
 clust_compo_PCs_dendro_fish|function|d46de9f4ffb35f66|||||||||||||||
 clust_compo_PCs_dendro_scats|function|df91fa8d0a60ecbb|||||||||||||||
 clust_find_k_table|function|bb6a38a52ad053b2|||||||||||||||
-clust_find_k_table_PCs|function|976fb7a3a3ffedcc|||||||||||||||
+clust_find_k_table_PCs|function|b7e24784a7f6b2c2|||||||||||||||
 clust_samples|function|4ef685308d179ccd|||||||||||||||
-clust_sp_attrib|function|7197be6ea10982ad|||||||||||||||
+clust_sp_attrib|function|e9c9170169d57ef7|||||||||||||||
 complete_fish_data|function|93df8e47e95484e5|||||||||||||||
 compute_means_sp|function|81ddc7854b750b9b|||||||||||||||
-corr_compo_fish|function|72b2585d7e87dd78|||||||||||||||
-corrplot_covariation_nut|stem|0af2c7b28bbf7dc6|3017966f9502bb3d|fbd77e9c1168dd24|-700010461||t20161.5697920738s|2159cf38e38ad193|115|rds|local|vector|||6.64||
+corr_compo_fish|function|35dd2f3a6cdb0dcb|||||||||||||||
+corrplot_covariation_nut|stem|2999925230436d55|3017966f9502bb3d|3cac1be6355f1f26|-700010461||t20166.4650490953s|2159cf38e38ad193|115|rds|local|vector|||3.19||
 data_file|stem|eff55efa346c54a6|b6db12d6aca8b12e|2c530c1562a7fbd1|-679625259|data/data_fish_YC.xlsx|t19551.3666725068s|89eb64fb23637724|125796|file|local|vector|||0||
 data_samples|stem|c3a110e70bd32f36|f4445865066367e8|3e90dc7e8c3bc0c5|2144477752||t19836.3281900823s|34f525d6d70686c6|25545|rds|local|vector|||0.04||
 data_summary|stem|c84a61cf8bee2e38|99d4ee259a809b32|5941d2ae324ad585|-651121042||t20161.5693109508s|f5d2e113edea5566|164041|rds|local|vector|||0.42|There were 8 warnings in dplyrmutate.The first warning wasℹ In argument SL_cm  as.numericSL_cm.ℹ In group 12 Family  Myctophidae, Species  Electrona antarctica,  Habitat  Mesopelagic.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 7 remaining warnings.|
-density_plot|stem|bc490738ff34e076|0d4304be68b0fbbd|f567fe586e406409|2113065254||t20161.569715009s|b7d4d37884c593be|120|rds|local|vector|||2.97||
-density_plot_all_nut|function|497f68d22203d078|||||||||||||||
+density_plot|stem|595ffec00b2f82cf|0d4304be68b0fbbd|f115383c48393917|2113065254||t20166.4555634143s|b7d4d37884c593be|120|rds|local|vector|||3.93||
+density_plot_all_nut|function|fece34f2f9295055|||||||||||||||
 densplot_compo_fish_tot|function|8f6230e24ae2567c|||||||||||||||
 fish_HC_essentials|stem|e97df58f904d7718|2c0b847b94a77efa|76727f6e629d1ccf|-471049352||t19886.6287396757s|402e589872025b0a|147|rds|local|vector|||0.08||
-fish_HC_essentials_biplot_k4|stem|80a049d91af4574f|f6f29d939eaf6244|20309e1e406ae27f|-2020276552||t20161.5700155369s|dcf033efd1d1accc|101|rds|local|vector|||0.36|Unknown or uninitialised column Code_sample.|
-fish_HC_essentials_boxplots_k4|stem|da054e2016fc6842|1ed28142d1f90732|d6a88ef83df997f9|2087925948||t20161.5700112156s|813d84234e908062|109|rds|local|vector|||11.06|position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge|
-fish_HC_essentials_dendro_clust_k4|stem|bd9f31f528bf1392|23252eb396ddda44|74ded4d648d7c06d|-134213817||t20161.569857586s|f2de2469be356334|110|rds|local|vector|||0.84||
+fish_HC_essentials_biplot_k4|stem|1ba6ad2d5f61b668|4183708fcd3b0fec|ce3c12e332a76c9f|-2020276552||t20166.5189898575s|36d9ea1c8315d78b|96|rds|local|vector|||0.64|Unknown or uninitialised column Code_sample.|
+fish_HC_essentials_boxplots_k4|stem|fe5fb0bf5ace1eb7|034cf2980a1cb86e|8e099c8d59e4e317|2087925948||t20166.5189824041s|809d88ef48c68ced|108|rds|local|vector|||13.7|position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge requires nonoverlapping x intervals.. position_dodge|
+fish_HC_essentials_dendro_clust_k4|stem|15be330d7cd9e70d|e2b9a50d25b9916a|03ff0656b60a94d8|-134213817||t20166.5188235354s|8781e7d3a4a21eb4|105|rds|local|vector|||1.45||
 fish_HC_essentials_dendro_diet_k4|stem|a6632240a1637ee4|5a3e332e8ac898f1|dd4708149de28162|1380809715||t19893.5998350487s|da7f33a0f827466a|104|rds|local|vector|||0.46||
 fish_HC_essentials_dendro_fam_k4|stem|ad95f0a6b83f50a6|9b6ee9a56b7a6c06|dd4708149de28162|1976374909||t19893.5998482345s|467e912dd1757136|106|rds|local|vector|||0.6||
 fish_HC_essentials_dendro_hab_k4|stem|a06b3e8c9ab6d5bd|5dffb1df92b39063|dac71b009398190c|-2085192652||t19893.5998297751s||107|rds|local|vector|||0.67||ℹ In argument Species_n  dplyrcase_when....ℹ In group 1 Family  Achiropsettidae and Species  Mancopsetta  maculata.Caused by error in dplyrcase_when Failed to evaluate the righthand side of formula 2.Caused by error in paste0 argument manquant, sans valeur associée par défaut
 fish_HC_essentials_dendro_k4|stem|ad95f0a6b83f50a6|9b6ee9a56b7a6c06|b8e9d9961fbb8c8e|814510023||t19886.659763975s|467e912dd1757136|106|rds|local|vector|||0.42||
-fish_HC_essentials_find_k|stem|6ca66d92a03ed21b|4d29497bb56f7005|f2f02b8fd1e9a82e|-1899308875||t19887.2715935641s|65e096147ab2bae9|1079|rds|local|vector|||0.23||
-fish_HC_essentials_find_k_boxplot|stem|bc8a5758eadc2028|4b0da0cf3b0d43e0|d50484612f960aa1|138975188||t19886.6314624098s|e441caf5cebd5545|94|rds|local|vector|||1.64|Removed 18 rows containing nonfinite outside the scale rangestat_boxplot.|
-fish_HC_essentials_find_k_means|stem|70a8e7d4befe5c32|4127f2c93d0b2552|3f43ec3538902b64|-2047280956||t19886.6314680423s|b7b41ca593cfebf5|116|rds|local|vector|||0.49|Removed 8 rows containing missing values or values outside the scale rangegeom_point.|
-fish_HC_essentials_k4|stem|e97df58f904d7718|2c0b847b94a77efa|191e3e2eefd5ac62|-1779369627||t19887.2715945978s|402e589872025b0a|147|rds|local|vector|||0.07||
-fish_HC_essentials_MWtest_k4|stem|44555a61ab864e60|cc095533442e1aa1|4f49ac4415757bb9|857613416||t20161.5698829903s|9ec6425b15734078|161461|rds|local|vector|||0.35|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
-fish_HC_essentials_table_sp_attribution_k4|stem|1882b12fc5806a4a|37945a0f4cbdb3f8|f4b013ffbd84f9d5|-1908900816||t20161.5698777792s|c33e26e5d69b6783|164354|rds|local|vector|||0.11||
-fish_HC_essentials_table_stats_k4|stem|93685cca87630ba1|e0dbfd66230e743f|45e95f1ecba2943c|1799392337||t20161.5698756047s|16f9b0bd75a320bc|1832|rds|local|vector|||0.25||
+fish_HC_essentials_find_k|stem|61c0d0c2d74e57d4|173bc6230686e922|bfb2acc501d33a5a|-1899308875||t20166.5188065201s|f0d92f59e4f4f215|1074|rds|local|vector|||0.14||
+fish_HC_essentials_find_k_boxplot|stem|fd91270983d569aa|40b1a01ee5b2ed9d|aafd4c4a5af23ce2|138975188||t20166.5190134227s|430affd0f4f6c5c3|89|rds|local|vector|||1.18|Removed 18 rows containing nonfinite outside the scale rangestat_boxplot.|
+fish_HC_essentials_find_k_means|stem|2a7e546c879ae55a|f733e7412a4f2a31|47efd86b05a7a26d|-2047280956||t20166.5190202654s|9b43f3e0f172ee04|111|rds|local|vector|||0.56|Removed 8 rows containing missing values or values outside the scale rangegeom_point.|
+fish_HC_essentials_k4|stem|ee74d5f5066fe87d|c81dd173aa675d75|7ca3101cb2844031|-1779369627||t20166.5188048595s|402e589872025b0a|147|rds|local|vector|||2.03||
+fish_HC_essentials_MWtest_k4|stem|68c503f892c6303e|3c95ced3e309eb19|074e3e5fdf059d10|857613416||t20166.5189949459s|5adbe746b1a2b3c5|163611|rds|local|vector|||0.34|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
+fish_HC_essentials_table_sp_attribution_k4|stem|26a40619714e0b23|0ee00cb185481988|597f1388d4862774|-1908900816||t20166.5189996516s|4f6e42322921d8c0|166356|rds|local|vector|||0.1||
+fish_HC_essentials_table_stats_k4|stem|70141b2eb15450e9|e26ee17ccd30f80d|ca06bd0dec87eb38|1799392337||t20166.5189977474s|0c85a5025fbda6cf|1831|rds|local|vector|||0.23||
 fish_HC_with_non_essentials|stem|de6553a55e30a1af|c38140ce39805482|cee0673fcaf1ab2b|1478456441||t19893.599857824s|2d8e656ac7732c01|153|rds|local|vector|||0.16||
 fish_HC_with_non_essentials_dendro_clust_k4|stem|907545e3ed5c69f9|c60970d4b2ee22dc|ae0fb89db583b977|1201026974||t20161.5698678975s|809d88ef48c68ced|108|rds|local|vector|||0.48|Removed 8 rows containing missing values or values outside the scale rangegeom_segment.|
 fish_HC_with_non_essentials_dendro_fam_k4|stem|5e1a4dde4c3cc7a8|66f6032360132de9|573484c2bdc4a9ed|-870313545||t19893.5998797791s|da7f33a0f827466a|104|rds|local|vector|||0.72|Removed 8 rows containing missing values or values outside the scale rangegeom_segment.|
 fish_HC_with_non_essentials_dendro_k4|stem|5e1a4dde4c3cc7a8|66f6032360132de9|9ddb98234fdbdcda|-1075310344||t19886.6898444183s|da7f33a0f827466a|104|rds|local|vector|||1.03|Removed 8 rows containing missing values or values outside the scale rangegeom_segment.|
-fish_pca_essentials|stem|2f5b37da6c1e60b4|a0f343b55becbf41|fa819ce871c78e87|217584923||t20161.569846904s|b9f8a406c1170442|5225|rds|local|vector|||0.05||
+fish_pca_essentials|stem|ea7b1bee545af7fc|a0f343b55becbf41|120d6ead6ab1baba|217584923||t20166.4799786126s|b9f8a406c1170442|5225|rds|local|vector|||2.83||
 fish_pca_with_non_essentials|stem|3514e9b61e79f615|9a00be4f83b3b677|58d349a093a1d155|-699359711||t20161.5698475377s|b7f807839439b691|7319|rds|local|vector|||0.05||
 hist_id_outliers|function|caf96e256260bdc3|||||||||||||||
 hist_id_outliers_xxxxxghkf|stem||a052946b30c0370f|d0f5e8f16d817ca1|499690362||t19867.4046047285s||0|rds|local|vector|||0.02||impossible de trouver la fonction hist_id_outliers_tech
@@ -101,14 +101,14 @@ id_outliers_hist|stem|2d8b3a86a72b64ea|63ab3a878cf2f3c9|54b3895d6d79176e|1305415
 ID_under_loq_values|function|064a85ef8637eb9a|||||||||||||||
 lineplot_compare_compo_prey_not_prey_abs|function|db353dd378b181ab|||||||||||||||
 lineplot_compare_compo_prey_not_prey_mean_sp_abs|function|377c61545c7c381d|||||||||||||||
-lineplot_compo_fish_sp_one_nut_grad|function|795449aea7836b91|||||||||||||||
-lineplot_compo_fish_sp_one_nut_legend|function|f2afeb9044245306|||||||||||||||
+lineplot_compo_fish_sp_one_nut_grad|function|dacb616b84d88381|||||||||||||||
+lineplot_compo_fish_sp_one_nut_legend|function|dd6ab7041f1f8778|||||||||||||||
 load_xl|function|e87653358e8b8f4b|||||||||||||||
-mean_per_species|function|f1c3493ee1059351|||||||||||||||
-means_clust_find_k_val|function|f74bf393e44cc2a8|||||||||||||||
+mean_per_species|function|a8a387d669022910|||||||||||||||
+means_clust_find_k_val|function|2cbbf86a49b3797d|||||||||||||||
 MWtest_clust_k2|function|fd9eaccec8ba8aec|||||||||||||||
 MWtest_clust_k3|function|deefe7c163349484|||||||||||||||
-MWtest_clust_k4|function|4c1eebc43b26bc84|||||||||||||||
+MWtest_clust_k4|function|7e1f49e1bdefdcf1|||||||||||||||
 MWtest_clust_k5|function|9a8694aad2267263|||||||||||||||
 MWtest_compo_prey_not_prey_abs|function|828261f3cf62da8d|||||||||||||||
 MWtest_compo_prey_not_prey_mean_sp_abs|function|ad58a377e444370e|||||||||||||||
@@ -128,23 +128,35 @@ remove_tech_outliers_and_clean_names|function|0a7b32873ebd0b71|||||||||||||||
 replace_outliers_conc|function|4687ddbb50cde3fd|||||||||||||||
 replace_under_loq_values|function|88a16068dc5f83bf|||||||||||||||
 set_up_tible_for_stat_analysis|function|d338c3777965f759|||||||||||||||
-stats_compo_clust|function|0f3fc01c13abbc52|||||||||||||||
+stats_compo_clust|function|6d5b001d767cbb98|||||||||||||||
+summarise_compo_fish_across_samples|function|e6c22023c5c404d9|||||||||||||||
+summarise_compo_fish_across_sp|function|a1b59825656df0c9|||||||||||||||
+summarise_compo_fish_per_sp|function|469b1e7bb97fbf84|||||||||||||||
 summary_samples|function|899415bb17123002|||||||||||||||
 table_compare_compo_prey_not_prey_abs|function|96cc70cb788a7fec|||||||||||||||
-table_compo_fish_samples_with_loq_replaced|function|1f205c9d210ca45f|||||||||||||||
+table_compo_fish_samples_with_loq_replaced|function|698950ce46ac17a4|||||||||||||||
 table_compo_fish_sp|function|57f70224dbcdacd9|||||||||||||||
 table_compo_fish_sp_with_loq_replaced|function|2ac1ace6d4eb9151|||||||||||||||
 table_compo_fish_sp_without_loq_replaced|function|1b9dbb395f9fd12d|||||||||||||||
 table_compo_relative|stem|67cdb573ee657b46|3d99be8bc63c9f97|a18147b202aff2d2|1858693785||t20161.5698432332s|a71548efb318ab1e|168099|rds|local|vector|||0.14||
-table_fish_compo_for_stat_analysis|stem|766ad8b5ba6921c3|7489e94c3cf0665d|97b7ac166e4ea210|-379809315||t20161.5696805354s|c6b71558399eb8af|4069|rds|local|vector|||0.09||
-table_fish_compo_no_stat_outliers|stem|0275d64a3156d2fc|cf09614ea0a83ba9|ee75d4328a280334|852532156||t20161.5694363941s|c3490f729c934850|36832|rds|local|vector|||0.05||
+table_fish_compo_for_stat_analysis|stem|45c933e82d52ba12|7489e94c3cf0665d|4608ead70e50c1e4|-379809315||t20166.4799458283s|c6b71558399eb8af|4069|rds|local|vector|||0.13||
+table_fish_compo_no_stat_outliers|stem|1f059f19dc1295cb|0f0ddd2698e619ee|258842c12f47ab62|852532156||t20166.4799434706s|c3490f729c934850|36832|rds|local|vector|||0.25||
 table_fish_samples_conc_results_clean|stem|70ebf427d660fc20|4cd509dcccd479d9|aad4e50685391077|1408077454||t20161.5824996231s|4d9a84b4f9b0dee2|36821|rds|local|vector|||0.34|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
+table_fish_samples_conc_with_loq_replaced|stem|c363cdfa82e83434|4cd509dcccd479d9|ec39d1e12472b337|1009682140||t20166.4303119783s|4d9a84b4f9b0dee2|36821|rds|local|vector|||0.25|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
+table_fish_samples_conc_without_loq_replaced|stem|baf927640cc4b618|9012f5ce94aac839|6018256d5610fd4a|853375617||t20166.4280140508s|e0d0b02d92b1dda7|44157|rds|local|vector|||0||
 table_fish_sp_conc_results|stem|40dd187932455cfc|8099d5ddccc4b349|0aa0553be2a47aba|-1271273149||t19867.4313699087s|cfc64fe3cec2122d|6165|rds|local|vector|||0.34|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 table_fish_sp_conc_results_clean|stem|eb692246b48b1bc5|c1ccd5d0e8dc8a5d|579ad753bd9c2162|-164288335||t20161.5825052667s|12590b0b36cba470|6177|rds|local|vector|||0.47|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 table_fish_sp_conc_results_loq_replaced|stem|abe119031486a712|c1ccd5d0e8dc8a5d|39ebd43f8b0274f2|550193224||t19867.4313658315s|cfc64fe3cec2122d|6165|rds|local|vector|||1.05|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 table_fish_sp_conc_results_without_loq_replaced|stem|1f516c2c4ccb6abb|8099d5ddccc4b349|0ac07157cec3c1bc|-1962925492||t20161.5848092453s|e1a44f700ad3b133|6178|rds|local|vector|||0.66|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
-table_nut_fish_compo_relative|function|a8994d14c2ed04f2|||||||||||||||
+table_nut_fish_compo_relative|function|b15e6f08d34bb357|||||||||||||||
+table_relative_compo_per_sp_with_loq_replaced|stem|7d8b059d64a2e70d|3d99be8bc63c9f97|a1893bb4e05c2f65|339491084||t20166.4612245416s|79a6f216eb3e21df|169990|rds|local|vector|||0.47||
+table_summary_compo_all_sp_with_loq_replaced|stem|68b231c5b63534db|3a713504662af410|ddad5c0af455043c|-421237294||t20166.4505022722s|c96990241ba32a5f|1073|rds|local|vector|||0.12||
+table_summary_compo_all_sp_without_loq_replaced|stem|1e591144cb23ee51|396513644b5dfbb4|faaf07a765744bb5|479719261||t20166.4505081086s|fdba8ab2454d6de6|1066|rds|local|vector|||0.27|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
+table_summary_compo_per_sp_with_loq_replaced|stem|3640734d7938d2bb|596d0cf6366ac344|f4e0594653f15eb7|841056592||t20166.4542809005s|ea3f16ac2bacbea3|16854|rds|local|vector|||0.66||
+table_summary_compo_per_sp_without_loq_replaced|stem|7eef3ba17f7c8297|54c72e5caec08dad|cbdcb0220a93e14c|-1846718033||t20166.4542878154s|b97e49c971a2bc08|16851|rds|local|vector|||0.58|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. There were 2 warnings in dplyrsummarise.The first warning wasℹ In argument min  roundminconcentration_mg_kg_dw, na.rm  TRUE, 3.ℹ In group 490 Family  Nototheniidae, Nutrient  Ag, Species   Dissostichus eleginoides.Caused by warning in min aucun argument trouvé pour min  Inf est renvoyéℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 table_summary_compo_samples|stem|96b99301d36a5d32|c1db34d9d17503ad|6ba7c044cf31d0d6|-278772962||t20161.5746094147s|2cf81cfdd3117042|179277|rds|local|vector|||1.14||
+table_summary_compo_samples_with_loq_replaced|stem|13ba4cea79d67519|ad33a75ef8e10a49|3586606fa222e9b9|-1430052627||t20166.4505005791s|2515b5bcc97038fd|1032|rds|local|vector|||0.12||
+table_summary_compo_samples_without_loq_replaced|stem|7835f1ca976851bc|a179601d40f4eead|6d8a397304873cd5|1333024289||t20166.4505050255s|a9924a933f37740c|1043|rds|local|vector|||0.23|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 tib_id_outliers|function|6ce2ce7d04c24d45|||||||||||||||
 tib_outliers_stats|stem|2732062d1d0e1958|261746bade09d284|10276ea129ef0102|899926478||t19893.5993249817s|f348264b6d84a875|169991|rds|local|vector|||1.21|There were 2 warnings in dplyrmutate.The first warning wasℹ In argument Pb  as.numericPb.Caused by warning NAs introduits lors de la conversion automatiqueℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
-tibble_mean_compo_per_sp|stem|7233124d651cda7e|5a4ab3a57df9bf81|84da3c3e0706dcd0|-1148307053||t20161.5696791786s|37446f58ec1e6777|4062|rds|local|vector|||0.04||
+tibble_mean_compo_per_sp|stem|a199830aa6e9277e|2d8ee386cd28bcef|0f0c7b9b4575227e|-1148307053||t20166.454288267s|f61860c0a463ae9d|4188|rds|local|vector|||0.02||

@@ -313,7 +313,6 @@ table_compo_fish_samples_with_loq_replaced <- function(fish_compo_tib) {
   fish_compo_tib |>
     dplyr::select(-c(Cr, Mo, V)) |>
     dplyr::mutate(Pb = as.numeric(Pb), 
-                  Sr = as.numeric(Sr), 
                   Ag = as.numeric(Ag)) |>
     dplyr::mutate(Ag = dplyr::case_when(is.na(Ag) ~ 0.01/2, 
                                         # loq is 0.01 for all samples 
@@ -331,94 +330,94 @@ table_compo_fish_samples_with_loq_replaced <- function(fish_compo_tib) {
 
 }
 
-
-
-#'
-#'
-#'
-#'
-#'
-# function to display boxplot of elemental composition per species
-table_compo_fish_sp_without_loq_replaced <- function(fish_compo_tib) {
-  
-  table <- fish_compo_tib |>
-    dplyr::select(-c(Cr, Mo, V)) |>
-    dplyr::mutate(Pb = as.numeric(Pb), 
-                  Sr = as.numeric(Sr), 
-                  Ag = as.numeric(Ag)) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
-                                 Fe, Zn, Cu, Mn,
-                                 As, Se, Ni, Co, 
-                                 Sr, Cd, Ag, Pb), 
-                        names_to = 'Nutrient', 
-                        values_to = "concentration_mg_kg_dw") |>
-    ## remove NAs if there is still some
-    #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
-    dplyr::group_by(Family, Species, Nutrient) |>
-    dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
-                     mean = round(mean(concentration_mg_kg_dw, 
-                                       na.rm = TRUE), 3),
-                     sd = round(sd(concentration_mg_kg_dw, 
-                                   na.rm = TRUE), 3)) |> 
-    tidyr::pivot_longer(cols = c(mean, sd), 
-                        names_to = "statistic", 
-                        values_to = "value") |>
-    tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = value)
-  
-  openxlsx::write.xlsx(table, 
-                       file = paste0("output/summary_fish_compo_sp_loq_not_replaced.xlsx"))
-  
-  table
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# function to display boxplot of elemental composition per species
-# with values under loq replaced by loq/2, so it depends on samples and/or
-# nutrients
-table_compo_fish_sp_with_loq_replaced <- function(fish_compo_tib) {
-  
-  table <- fish_compo_tib |>
-    dplyr::select(-c(Cr, Mo, V)) |>
-    dplyr::mutate(Pb = as.numeric(Pb), 
-                  Sr = as.numeric(Sr), 
-                  Ag = as.numeric(Ag)) |>
-    dplyr::mutate(Ag = dplyr::case_when(is.na(Ag) ~ 0.01/2, 
-                                        # loq is 0.01 for all samples 
-                                        TRUE ~ Ag), 
-                  Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
-                                        # loq is 0.01 for all samples 
-                                        TRUE ~ Pb)) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
-                                 Fe, Zn, Cu, Mn,
-                                 As, Se, Ni, Co, 
-                                 Sr, Cd, Ag, Pb), 
-                        names_to = 'Nutrient', 
-                        values_to = "concentration_mg_kg_dw") |>
-    ## remove NAs if there is still some
-    #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
-    dplyr::group_by(Family, Species, Nutrient) |>
-    dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
-                     mean = round(mean(concentration_mg_kg_dw, 
-                                       na.rm = FALSE), 3),
-                     sd = round(sd(concentration_mg_kg_dw, 
-                                   na.rm = FALSE), 3)) |> 
-    tidyr::pivot_longer(cols = c(mean, sd), 
-                        names_to = "statistic", 
-                        values_to = "value") |>
-    tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = value)
-  
-  openxlsx::write.xlsx(table, 
-                       file = paste0("output/summary_fish_compo_sp_loq_replaced.xlsx"))
-  
-  table
-  
-}
-
+#' 
+#' 
+#' #'
+#' #'
+#' #'
+#' #'
+#' #'
+#' # function to display boxplot of elemental composition per species
+#' table_compo_fish_sp_without_loq_replaced <- function(fish_compo_tib) {
+#'   
+#'   table <- fish_compo_tib |>
+#'     dplyr::select(-c(Cr, Mo, V)) |>
+#'     dplyr::mutate(Pb = as.numeric(Pb), 
+#'                   Sr = as.numeric(Sr), 
+#'                   Ag = as.numeric(Ag)) |>
+#'     tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+#'                                  Fe, Zn, Cu, Mn,
+#'                                  As, Se, Ni, Co, 
+#'                                  Sr, Cd, Ag, Pb), 
+#'                         names_to = 'Nutrient', 
+#'                         values_to = "concentration_mg_kg_dw") |>
+#'     ## remove NAs if there is still some
+#'     #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
+#'     dplyr::group_by(Family, Species, Nutrient) |>
+#'     dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
+#'                      mean = round(mean(concentration_mg_kg_dw, 
+#'                                        na.rm = TRUE), 3),
+#'                      sd = round(sd(concentration_mg_kg_dw, 
+#'                                    na.rm = TRUE), 3)) |> 
+#'     tidyr::pivot_longer(cols = c(mean, sd), 
+#'                         names_to = "statistic", 
+#'                         values_to = "value") |>
+#'     tidyr::pivot_wider(names_from = Nutrient, 
+#'                        values_from = value)
+#'   
+#'   openxlsx::write.xlsx(table, 
+#'                        file = paste0("output/summary_fish_compo_sp_loq_not_replaced.xlsx"))
+#'   
+#'   table
+#'   
+#' }
+#' 
+#' 
+#' #'
+#' #'
+#' #'
+#' #'
+#' #'
+#' # function to display boxplot of elemental composition per species
+#' # with values under loq replaced by loq/2, so it depends on samples and/or
+#' # nutrients
+#' table_compo_fish_sp_with_loq_replaced <- function(fish_compo_tib) {
+#'   
+#'   table <- fish_compo_tib |>
+#'     dplyr::select(-c(Cr, Mo, V)) |>
+#'     dplyr::mutate(Pb = as.numeric(Pb), 
+#'                   Sr = as.numeric(Sr), 
+#'                   Ag = as.numeric(Ag)) |>
+#'     dplyr::mutate(Ag = dplyr::case_when(is.na(Ag) ~ 0.01/2, 
+#'                                         # loq is 0.01 for all samples 
+#'                                         TRUE ~ Ag), 
+#'                   Pb = dplyr::case_when(is.na(Pb) ~ 0.01/2, 
+#'                                         # loq is 0.01 for all samples 
+#'                                         TRUE ~ Pb)) |>
+#'     tidyr::pivot_longer(cols = c(Ca, P, Na, K, Mg, 
+#'                                  Fe, Zn, Cu, Mn,
+#'                                  As, Se, Ni, Co, 
+#'                                  Sr, Cd, Ag, Pb), 
+#'                         names_to = 'Nutrient', 
+#'                         values_to = "concentration_mg_kg_dw") |>
+#'     ## remove NAs if there is still some
+#'     #dplyr::filter(!(is.na(concentration_mg_kg_dw))) |>
+#'     dplyr::group_by(Family, Species, Nutrient) |>
+#'     dplyr::summarise(n = dplyr::n_distinct(Code_sample), 
+#'                      mean = round(mean(concentration_mg_kg_dw, 
+#'                                        na.rm = FALSE), 3),
+#'                      sd = round(sd(concentration_mg_kg_dw, 
+#'                                    na.rm = FALSE), 3)) |> 
+#'     tidyr::pivot_longer(cols = c(mean, sd), 
+#'                         names_to = "statistic", 
+#'                         values_to = "value") |>
+#'     tidyr::pivot_wider(names_from = Nutrient, 
+#'                        values_from = value)
+#'   
+#'   openxlsx::write.xlsx(table, 
+#'                        file = paste0("output/summary_fish_compo_sp_loq_replaced.xlsx"))
+#'   
+#'   table
+#'   
+#' }
+#' 
